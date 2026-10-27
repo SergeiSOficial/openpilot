@@ -1,0 +1,67 @@
+{
+  "openpilot/system/camerad/camerad": {
+    "architecture": "AArch64",
+    "size": 4942560,
+    "dynamic_libraries": "linux-vdso.so.1 (0x0000400000810000)\n\tlibstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x0000400000970000)\n\tlibm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000400000c10000)\n\tlibgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x0000400000cc0000)\n\tlibc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000400000d00000)\n\t/lib/ld-linux-aarch64.so.1 (0x00007317b3250000)"
+  },
+  "openpilot/system/loggerd/loggerd": {
+    "architecture": "AArch64",
+    "size": 4975792,
+    "dynamic_libraries": "linux-vdso.so.1 (0x0000400000810000)\n\tlibavformat.so.61 => /usr/local/venv/lib/python3.12/site-packages/ffmpeg/install/lib/libavformat.so.61 (0x00004000009c0000)\n\tlibavcodec.so.61 => /usr/local/venv/lib/python3.12/site-packages/ffmpeg/install/lib/libavcodec.so.61 (0x0000400000ac0000)\n\tlibavutil.so.59 => /usr/local/venv/lib/python3.12/site-packages/ffmpeg/install/lib/libavutil.so.59 (0x00004000011c0000)\n\tlibstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x0000400002320000)\n\tlibgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x00004000025b0000)\n\tlibc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x00004000025f0000)\n\tlibm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x00004000027c0000)\n\tlibpthread.so.0 => /lib/aarch64-linux-gnu/libpthread.so.0 (0x0000400002870000)\n\tlibdl.so.2 => /lib/aarch64-linux-gnu/libdl.so.2 (0x00004000028a0000)\n\t/lib/ld-linux-aarch64.so.1 (0x00007ef3eb110000)"
+  },
+  "openpilot/system/loggerd/encoderd": {
+    "architecture": "AArch64",
+    "size": 6470680,
+    "dynamic_libraries": "linux-vdso.so.1 (0x0000400000810000)\n\tlibavformat.so.61 => /usr/local/venv/lib/python3.12/site-packages/ffmpeg/install/lib/libavformat.so.61 (0x0000400000980000)\n\tlibavcodec.so.61 => /usr/local/venv/lib/python3.12/site-packages/ffmpeg/install/lib/libavcodec.so.61 (0x0000400000a80000)\n\tlibavutil.so.59 => /usr/local/venv/lib/python3.12/site-packages/ffmpeg/install/lib/libavutil.so.59 (0x0000400001180000)\n\tlibm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x00004000022e0000)\n\tlibstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x0000400002390000)\n\tlibgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x0000400002630000)\n\tlibc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000400002670000)\n\tlibpthread.so.0 => /lib/aarch64-linux-gnu/libpthread.so.0 (0x0000400002840000)\n\tlibdl.so.2 => /lib/aarch64-linux-gnu/libdl.so.2 (0x0000400002870000)\n\t/lib/ld-linux-aarch64.so.1 (0x000075347a5b0000)"
+  },
+  "openpilot/system/loggerd/bootlog": {
+    "architecture": "AArch64",
+    "size": 3690176,
+    "dynamic_libraries": "linux-vdso.so.1 (0x0000400000810000)\n\tlibstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x00004000009b0000)\n\tlibgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x0000400000c40000)\n\tlibc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000400000c90000)\n\tlibm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000400000e50000)\n\t/lib/ld-linux-aarch64.so.1 (0x00007cb705730000)"
+  },
+  "openpilot/selfdrive/pandad/pandad": {
+    "architecture": "AArch64",
+    "size": 4612296,
+    "dynamic_libraries": "linux-vdso.so.1 (0x0000400000810000)\n\tlibstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x0000400000970000)\n\tlibgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x0000400000c00000)\n\tlibc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000400000c40000)\n\tlibm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000400000e10000)\n\t/lib/ld-linux-aarch64.so.1 (0x000079e959090000)"
+  },
+  "openpilot/common/libparams_c.so": {
+    "architecture": "AArch64",
+    "size": 2487344,
+    "dynamic_libraries": "linux-vdso.so.1 (0x0000400000810000)\n\tlibstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x0000400000950000)\n\tlibgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x0000400000be0000)\n\tlibc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000400000c20000)\n\tlibm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000400000df0000)\n\t/lib/ld-linux-aarch64.so.1 (0x00007301ca620000)"
+  },
+  "openpilot/cereal/messaging/bridge": {
+    "architecture": "AArch64",
+    "size": 1797944,
+    "dynamic_libraries": "linux-vdso.so.1 (0x0000400000810000)\n\tlibstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x00004000008f0000)\n\tlibgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x0000400000b80000)\n\tlibc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000400000bd0000)\n\tlibm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000400000d90000)\n\t/lib/ld-linux-aarch64.so.1 (0x00007da497930000)"
+  },
+  "msgq_repo/msgq/ipc_pyx.so": {
+    "architecture": "AArch64",
+    "size": 952800,
+    "dynamic_libraries": "linux-vdso.so.1 (0x0000400000810000)\n\tlibstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x0000400000890000)\n\tlibm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000400000b30000)\n\tlibgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x0000400000be0000)\n\tlibc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000400000c20000)\n\t/lib/ld-linux-aarch64.so.1 (0x000072f89a530000)"
+  },
+  "msgq_repo/msgq/visionipc/visionipc_pyx.so": {
+    "architecture": "AArch64",
+    "size": 2951560,
+    "dynamic_libraries": "linux-vdso.so.1 (0x0000400000810000)\n\tlibstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x0000400000970000)\n\tlibm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000400000c00000)\n\tlibgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x0000400000cb0000)\n\tlibc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000400000cf0000)\n\t/lib/ld-linux-aarch64.so.1 (0x00007d02cc4f0000)"
+  },
+  "rednose_repo/rednose/helpers/ekf_sym_pyx.so": {
+    "architecture": "AArch64",
+    "size": 2424896,
+    "dynamic_libraries": "linux-vdso.so.1 (0x0000400000810000)\n\tlibstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x00004000008b0000)\n\tlibm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000400000b40000)\n\tlibgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x0000400000c00000)\n\tlibc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000400000c40000)\n\t/lib/ld-linux-aarch64.so.1 (0x000075229fcf0000)"
+  },
+  "openpilot/selfdrive/locationd/models/generated/libcar.so": {
+    "architecture": "AArch64",
+    "size": 24124680,
+    "dynamic_libraries": "linux-vdso.so.1 (0x0000400000810000)\n\tlibstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x0000400000890000)\n\tlibgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x0000400000b30000)\n\tlibc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000400000b70000)\n\tlibm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000400000d40000)\n\t/lib/ld-linux-aarch64.so.1 (0x000078a0ec240000)"
+  },
+  "openpilot/selfdrive/locationd/models/generated/libpose.so": {
+    "architecture": "AArch64",
+    "size": 20615296,
+    "dynamic_libraries": "linux-vdso.so.1 (0x0000400000810000)\n\tlibstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x00004000008a0000)\n\tlibm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000400000b30000)\n\tlibgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x0000400000be0000)\n\tlibc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000400000c20000)\n\t/lib/ld-linux-aarch64.so.1 (0x0000789f9f330000)"
+  },
+  "openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/acados_ocp_solver_pyx.so": {
+    "architecture": "AArch64",
+    "size": 1140352,
+    "dynamic_libraries": "linux-vdso.so.1 (0x0000400000810000)\n\tlibacados_ocp_solver_long.so => /data/openpilot/openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/libacados_ocp_solver_long.so (0x00004000008a0000)\n\tlibc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000400000900000)\n\tlibacados.so => /data/openpilot/openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/libacados.so (0x0000400000ad0000)\n\t/lib/ld-linux-aarch64.so.1 (0x000079f29ceb0000)\n\tlibqpOASES_e.so.3.1 => /data/openpilot/openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/libqpOASES_e.so.3.1 (0x0000400000b60000)\n\tlibhpipm.so => /data/openpilot/openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/libhpipm.so (0x0000400000bd0000)\n\tlibblasfeo.so => /data/openpilot/openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/libblasfeo.so (0x0000400000d20000)\n\tlibm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000400000e60000)"
+  }
+}

@@ -1,0 +1,20 @@
+----------------------------------------------------------------------
+Ran 422 tests in 107.953s
+
+OK (skipped=194)
+body set()
+byd set()
+chrysler {0, 2, 4, 8, 9, 12, 18}
+ford {0, 1, 2, 3}
+gm set()
+honda set()
+hyundai set()
+mazda set()
+mg set()
+nissan set()
+psa set()
+rivian set()
+subaru {0, 1, 3, 4, 8}
+tesla set()
+toyota {0, 1, 2, 3, 4, 6}
+volkswagen {0, 2, 4, 8, 9}

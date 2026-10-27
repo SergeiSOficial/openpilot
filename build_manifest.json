@@ -1,0 +1,581 @@
+{
+  "format": 1,
+  "kind": "comma-four-arm64-release-candidate",
+  "hardware_acceptance": "pending",
+  "source_branch": "ioniq-phev-2018-stable",
+  "source_commit": "8a7f2e73298a96888a715c367135cbeb2b3d4da0",
+  "validated_runtime_base": "6939d172e85e3b91f16d90cc8de72e8f938cc196",
+  "source_changes": "Documentation only; Hyundai control, fingerprint, and safety code unchanged.",
+  "target": {
+    "architecture": "aarch64",
+    "cpu": "cortex-a57",
+    "agnos_version": "19.9",
+    "virtual_platform": {
+      "virtual_device_model": "comma mici",
+      "scope": "emulated AGNOS rootfs only",
+      "physical_hardware_emulated": false,
+      "purpose": "Select the comma four software configuration for imports and unit tests; no device I/O or HIL pass claimed."
+    }
+  },
+  "builder": {
+    "orchestrator": "QEMU user-mode aarch64 in the verified pinned AGNOS image",
+    "compiler": "Clang 18.1.3 native cross compilation --target=aarch64-linux-gnu",
+    "sysroot": "AGNOS 19.9; device Python 3.12.3 and packaged device SDK",
+    "packages": {
+      "scons": "4.10.1",
+      "numpy": "2.5.1",
+      "pycapnp": "2.1.0",
+      "comma-deps-capnproto": "1.0.1.post98",
+      "comma-deps-acados": "0.2.2.post98",
+      "comma-deps-ffmpeg": "7.1.0.post98",
+      "comma-deps-json11": "20170411.0.post98",
+      "comma-deps-zstd": "1.5.6.post98",
+      "comma-deps-zeromq": "4.3.5.post98",
+      "comma-deps-ncurses": "6.5.post98",
+      "comma-deps-libusb": "1.0.29.post98"
+    }
+  },
+  "agnos_image": {
+    "manifest": {
+      "name": "system",
+      "url": "https://commadist.azureedge.net/agnosupdate/system-80d9373348ddff2a5d1f534fab3420383939c96f3eba60baab6b15339fc602c7.img.xz",
+      "hash": "9aebca09b9d142718e71efbfe44b723010eec6e70067c043c63186067291739d",
+      "hash_raw": "80d9373348ddff2a5d1f534fab3420383939c96f3eba60baab6b15339fc602c7",
+      "size": 4718592000,
+      "sparse": true,
+      "full_check": false,
+      "has_ab": true,
+      "ondevice_hash": "270b76c5c5568828e3883390b83ea445425a104dd42119d68f06093ce6b6fcef",
+      "alt": {
+        "hash": "80d9373348ddff2a5d1f534fab3420383939c96f3eba60baab6b15339fc602c7",
+        "url": "https://commadist.azureedge.net/agnosupdate/system-80d9373348ddff2a5d1f534fab3420383939c96f3eba60baab6b15339fc602c7.img",
+        "size": 4718592000
+      }
+    },
+    "raw_size": 4718592000,
+    "raw_sha256": "80d9373348ddff2a5d1f534fab3420383939c96f3eba60baab6b15339fc602c7",
+    "sparse_sha256": "9aebca09b9d142718e71efbfe44b723010eec6e70067c043c63186067291739d",
+    "verified": true
+  },
+  "profile": {
+    "candidate": "HYUNDAI_IONIQ_PHEV_2019",
+    "stock_scc": true,
+    "alpha_longitudinal_default": false,
+    "minimum_steer_mph": 32,
+    "year_2018_verified": false,
+    "forced_fingerprint": false
+  },
+  "models": {
+    "driving_tinygrad.pkl": {
+      "sha256": "6398a4b0e474eac003280599cef701cd01c670a42c0d74c7df72583bfc923329",
+      "size": 70491206,
+      "metadata": {
+        "metadata": {
+          "output_slices": "gASVcwEAAAAAAAB9lCiMBG1ldGGUjAhidWlsdGluc5SMBXNsaWNllJOUSwBLN06HlFKUjAtkZXNp\ncmVfcHJlZJRoBEs3S1dOh5RSlIwEcG9zZZRoBEtXS2NOh5RSlIwWd2lkZV9mcm9tX2RldmljZV9l\ndWxlcpRoBEtjS2lOh5RSlIwOcm9hZF90cmFuc2Zvcm2UaARLaUt1ToeUUpSMCmxhbmVfbGluZXOU\naARLdU2FAk6HlFKUjA9sYW5lX2xpbmVzX3Byb2KUaARNhQJNjQJOh5RSlIwKcm9hZF9lZGdlc5Ro\nBE2NAk2VA06HlFKUjARsZWFklGgETZUDTSUEToeUUpSMCWxlYWRfcHJvYpRoBE0lBE0oBE6HlFKU\njAxoaWRkZW5fc3RhdGWUaARNKARNKAZOh5RSlIwEcGxhbpRoBE0oBk0GCk6HlFKUjAxkZXNpcmVf\nc3RhdGWUaARNBgpNDgpOh5RSlIwDcGFklGgESv7///9OToeUUpR1Lg==\n",
+          "model_checkpoint": "6a7d09ad-bcc9-43bc-916d-29287e60cee2/200/a27b3122-733e-4a65-938b-acfebebbe5e8/100"
+        },
+        "input_shapes": {
+          "new_img": [
+            2,
+            6,
+            128,
+            256
+          ],
+          "desire": [
+            8
+          ],
+          "traffic_convention": [
+            1,
+            2
+          ],
+          "action_t": [
+            1,
+            2
+          ],
+          "state_img_q": [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "state_desire_q": [
+            100,
+            1,
+            8
+          ],
+          "state_feat_q": [
+            96,
+            1,
+            512
+          ]
+        },
+        "output_shapes": {
+          "outputs": [
+            1,
+            2576
+          ],
+          "next_state_img_q": [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "next_state_desire_q": [
+            100,
+            1,
+            8
+          ],
+          "next_state_feat_q": [
+            96,
+            1,
+            512
+          ]
+        }
+      },
+      "input_specs": {
+        "new_img": [
+          [
+            2,
+            6,
+            128,
+            256
+          ],
+          "uint8",
+          "QCOM"
+        ],
+        "desire": [
+          [
+            8
+          ],
+          "float32",
+          "QCOM"
+        ],
+        "traffic_convention": [
+          [
+            1,
+            2
+          ],
+          "float32",
+          "QCOM"
+        ],
+        "action_t": [
+          [
+            1,
+            2
+          ],
+          "float32",
+          "QCOM"
+        ],
+        "state_img_q": [
+          [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "uint8",
+          "QCOM"
+        ],
+        "state_desire_q": [
+          [
+            100,
+            1,
+            8
+          ],
+          "float32",
+          "QCOM"
+        ],
+        "state_feat_q": [
+          [
+            96,
+            1,
+            512
+          ],
+          "float32",
+          "QCOM"
+        ]
+      },
+      "output_specs": {
+        "outputs": [
+          [
+            1,
+            2576
+          ],
+          "float32",
+          "QCOM"
+        ],
+        "next_state_img_q": [
+          [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "uint8",
+          "QCOM"
+        ],
+        "next_state_desire_q": [
+          [
+            100,
+            1,
+            8
+          ],
+          "float32",
+          "QCOM"
+        ],
+        "next_state_feat_q": [
+          [
+            96,
+            1,
+            512
+          ],
+          "float32",
+          "QCOM"
+        ]
+      },
+      "onnx_metadata_match": true,
+      "output_shapes_match": true,
+      "source_ref": "f7db927c728bab57bb1263e05465766a8f28fc9d"
+    },
+    "dmonitoring_model_tinygrad.pkl": {
+      "sha256": "acefa66802a7b02bb4ee485725e5b5eb2e96522a3a82ff8efc83dad7568926fc",
+      "size": 20781963,
+      "metadata": {
+        "metadata": {
+          "model_checkpoint": "a9462a65-1886-462a-8847-ad4624d9abfc/200",
+          "output_slices": "gASVewIAAAAAAAB9lCiMDmZhY2VfZGVzY3NfbGhklIwIYnVpbHRpbnOUjAVzbGljZZSTlEsASwxO\nh5RSlIwNZmFjZV9wcm9iX2xoZJRoBEsMSw1Oh5RSlIwRbGVmdF9leWVfcHJvYl9saGSUaARLDUsO\nToeUUpSMEnJpZ2h0X2V5ZV9wcm9iX2xoZJRoBEsOSw9Oh5RSlIwTc3VuZ2xhc3Nlc19wcm9iX2xo\nZJRoBEsPSxBOh5RSlIwTbGVmdF9ibGlua19wcm9iX2xoZJRoBEsQSxFOh5RSlIwUcmlnaHRfYmxp\nbmtfcHJvYl9saGSUaARLEUsSToeUUpSMFHVzaW5nX3Bob25lX3Byb2JfbGhklGgESxJLE06HlFKU\njA5zbGVlcF9wcm9iX2xoZJRoBEsTSxROh5RSlIwOZmFjZV9kZXNjc19yaGSUaARLFEsgToeUUpSM\nDWZhY2VfcHJvYl9yaGSUaARLIEshToeUUpSMEWxlZnRfZXllX3Byb2JfcmhklGgESyFLIk6HlFKU\njBJyaWdodF9leWVfcHJvYl9yaGSUaARLIksjToeUUpSME3N1bmdsYXNzZXNfcHJvYl9yaGSUaARL\nI0skToeUUpSME2xlZnRfYmxpbmtfcHJvYl9yaGSUaARLJEslToeUUpSMFHJpZ2h0X2JsaW5rX3By\nb2JfcmhklGgESyVLJk6HlFKUjBR1c2luZ19waG9uZV9wcm9iX3JoZJRoBEsmSydOh5RSlIwOc2xl\nZXBfcHJvYl9yaGSUaARLJ0soToeUUpSMDndoZWVsX29uX3JpZ2h0lGgESyhLKU6HlFKUjAhmZWF0\ndXJlc5RoBEspTSkCToeUUpR1Lg==\n"
+        },
+        "input_shapes": {
+          "input_img": [
+            1,
+            1382400
+          ],
+          "calib": [
+            1,
+            3
+          ]
+        },
+        "output_shapes": {
+          "outputs": [
+            1,
+            553
+          ]
+        }
+      },
+      "input_specs": {
+        "input_img": [
+          [
+            1,
+            1382400
+          ],
+          "uint8",
+          "QCOM"
+        ],
+        "calib": [
+          [
+            1,
+            3
+          ],
+          "float32",
+          "QCOM"
+        ]
+      },
+      "output_specs": {
+        "outputs": [
+          [
+            1,
+            553
+          ],
+          "float32",
+          "QCOM"
+        ]
+      },
+      "onnx_metadata_match": true,
+      "output_shapes_match": true,
+      "metadata_differences": {
+        "model_checkpoint": {
+          "expected": "a9462a65-1886-462a-8847-ad4624d9abfc/200",
+          "official": "586aece6-afd8-4d8b-b7da-5634d6eae5e6"
+        }
+      },
+      "source_ref": "de73842a2fedb82b4a0f8a3101189dde1b29ebf3",
+      "metadata_match": true,
+      "runtime_match": true,
+      "checkpoint": "a9462a65-1886-462a-8847-ad4624d9abfc/200"
+    },
+    "driving_warp_1344x760_tinygrad.pkl": {
+      "sha256": "6bfe4ecc35bd7711a36741087efadb52cedfc47fcb727add30708cde3fdcde8a",
+      "size": 844693,
+      "metadata": {},
+      "input_specs": {
+        "input_frame": [
+          [
+            2,
+            1622016
+          ],
+          "|u1",
+          "QCOM"
+        ],
+        "M_inv": [
+          [
+            2,
+            3,
+            3
+          ],
+          "<f4",
+          "QCOM"
+        ]
+      },
+      "output_specs": null,
+      "source_ref": "f7db927c728bab57bb1263e05465766a8f28fc9d"
+    },
+    "driving_warp_1928x1208_tinygrad.pkl": {
+      "sha256": "6f7289eac4d673cc2102299dc6652ff69f70b878560936a8ccc3a10a31f72021",
+      "size": 844502,
+      "metadata": {},
+      "input_specs": {
+        "input_frame": [
+          [
+            2,
+            3735552
+          ],
+          "|u1",
+          "QCOM"
+        ],
+        "M_inv": [
+          [
+            2,
+            3,
+            3
+          ],
+          "<f4",
+          "QCOM"
+        ]
+      },
+      "output_specs": null,
+      "source_ref": "f7db927c728bab57bb1263e05465766a8f28fc9d"
+    },
+    "dm_warp_1344x760_tinygrad.pkl": {
+      "sha256": "fbfc371f6cde5ee86eae031301ac169983bf22966fd25c3bb09ce84188ee89f0",
+      "size": 1401865,
+      "metadata": {},
+      "input_specs": {
+        "input_frame": [
+          [
+            2428928
+          ],
+          "|u1",
+          "QCOM"
+        ],
+        "M_inv": [
+          [
+            3,
+            3
+          ],
+          "<f4",
+          "NPY"
+        ]
+      },
+      "output_specs": null,
+      "source_ref": "f7db927c728bab57bb1263e05465766a8f28fc9d"
+    },
+    "dm_warp_1928x1208_tinygrad.pkl": {
+      "sha256": "b296e29eb8c1b88a930e743ba3efb1f0c4b12081ef805112fe1d91faad76e29f",
+      "size": 1401817,
+      "metadata": {},
+      "input_specs": {
+        "input_frame": [
+          [
+            4804608
+          ],
+          "|u1",
+          "QCOM"
+        ],
+        "M_inv": [
+          [
+            3,
+            3
+          ],
+          "<f4",
+          "NPY"
+        ]
+      },
+      "output_specs": null,
+      "source_ref": "f7db927c728bab57bb1263e05465766a8f28fc9d"
+    }
+  },
+  "firmware": {
+    "panda/board/obj/body_h7.bin.signed": {
+      "sha256": "7ca330bf9cf3f25e290126ccc9bb146bdbf85a85c9db208098cbb7ac89998226",
+      "size": 76644,
+      "source_release": "f7db927c728bab57bb1263e05465766a8f28fc9d",
+      "release_rsa_signature_verified": true
+    },
+    "panda/board/obj/bootstub.body_h7.bin": {
+      "sha256": "ee627123c188a417613921a58ee5c21bea365e06156735bb6e4e28a7b37db0ba",
+      "size": 12004,
+      "source_release": "f7db927c728bab57bb1263e05465766a8f28fc9d"
+    },
+    "panda/board/obj/bootstub.panda_h7.bin": {
+      "sha256": "58aed116f34ad6e435cb24c9276f700ded013700723163054fb23b9c2d8f3b69",
+      "size": 18788,
+      "source_release": "f7db927c728bab57bb1263e05465766a8f28fc9d"
+    },
+    "panda/board/obj/cert.h": {
+      "sha256": "ec991cee3c11900aeafb2f0a033a884c011b8abd5976b6d68709f30a868ac61d",
+      "size": 1744,
+      "source_release": "f7db927c728bab57bb1263e05465766a8f28fc9d"
+    },
+    "panda/board/obj/gitversion.h": {
+      "sha256": "3964cd15228065a47e6ada4d1ca502187a75fe20f50605089b0f92c052c2b49f",
+      "size": 105,
+      "source_release": "f7db927c728bab57bb1263e05465766a8f28fc9d"
+    },
+    "panda/board/obj/panda_h7.bin.signed": {
+      "sha256": "0276086ceedd6633e18a993991759f84ea2448fa2135c6e574c02f258bf4af3b",
+      "size": 77152,
+      "source_release": "f7db927c728bab57bb1263e05465766a8f28fc9d",
+      "release_rsa_signature_verified": true
+    },
+    "panda/board/obj/version": {
+      "sha256": "fb4c40df7fd699d0b5e2c5a8b62bbdb74c8fdb92a5fad2d93652fd573b7c6a16",
+      "size": 19,
+      "source_release": "f7db927c728bab57bb1263e05465766a8f28fc9d"
+    }
+  },
+  "panda_release_rsa_signature_verified": true,
+  "software_tests": [
+    {
+      "name": "compiled-imports",
+      "returncode": 0,
+      "summary": []
+    },
+    {
+      "name": "hyundai-firmware-safety",
+      "returncode": 0,
+      "summary": [
+        "Ran 422 tests in 107.953s",
+        "OK (skipped=194)"
+      ]
+    },
+    {
+      "name": "ioniq-baseline",
+      "returncode": 0,
+      "summary": [
+        "Ran 4 tests in 0.793s",
+        "OK"
+      ]
+    },
+    {
+      "name": "ioniq-route",
+      "returncode": 0,
+      "summary": [
+        "Ran 7 tests in 86.982s",
+        "OK"
+      ]
+    },
+    {
+      "name": "ioniq-interfaces",
+      "returncode": 0,
+      "summary": [
+        "2 passed in 10.42s"
+      ]
+    }
+  ],
+  "artifacts": {
+    "rednose_repo/rednose/helpers/ekf_sym_pyx.so": {
+      "machine": 183,
+      "size": 2424896
+    },
+    "openpilot/common/libparams_c.so": {
+      "machine": 183,
+      "size": 2487344
+    },
+    "openpilot/cereal/messaging/bridge": {
+      "machine": 183,
+      "size": 1797944
+    },
+    "openpilot/system/camerad/camerad": {
+      "machine": 183,
+      "size": 4942560
+    },
+    "openpilot/system/loggerd/loggerd": {
+      "machine": 183,
+      "size": 4975792
+    },
+    "openpilot/system/loggerd/encoderd": {
+      "machine": 183,
+      "size": 6470680
+    },
+    "openpilot/system/loggerd/bootlog": {
+      "machine": 183,
+      "size": 3690176
+    },
+    "openpilot/selfdrive/pandad/pandad": {
+      "machine": 183,
+      "size": 4612296
+    },
+    "openpilot/selfdrive/locationd/models/generated/libcar.so": {
+      "machine": 183,
+      "size": 24124680
+    },
+    "openpilot/selfdrive/locationd/models/generated/libpose.so": {
+      "machine": 183,
+      "size": 20615296
+    },
+    "openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/libblasfeo.so": {
+      "machine": 183,
+      "size": 1256672
+    },
+    "openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/acados_ocp_solver_pyx.so": {
+      "machine": 183,
+      "size": 1140352
+    },
+    "openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/libqpOASES_e.so.3.1": {
+      "machine": 183,
+      "size": 350176
+    },
+    "openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/libacados_ocp_solver_long.so": {
+      "machine": 183,
+      "size": 175408
+    },
+    "openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/libacados.so": {
+      "machine": 183,
+      "size": 599184
+    },
+    "openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/libhpipm.so": {
+      "machine": 183,
+      "size": 1383976
+    },
+    "msgq_repo/msgq/ipc_pyx.so": {
+      "machine": 183,
+      "size": 952800
+    },
+    "msgq_repo/msgq/visionipc/visionipc_pyx.so": {
+      "machine": 183,
+      "size": 2951560
+    }
+  },
+  "limits": [
+    "GPU model artifacts are reused upstream artifacts, not freshly executed or compiled on Qualcomm hardware here.",
+    "Driver-monitoring artifact uses the validated checkpoint and runtime from upstream commit de73842a2fedb82b4a0f8a3101189dde1b29ebf3.",
+    "No on-device camera, GPU, CAN, timing, road, or 2018 vehicle acceptance tests were run.",
+    "Custom fork channel; keep alpha longitudinal and experimental mode off for the stock-SCC profile."
+  ],
+  "packaged_runtime_smoke": {
+    "architecture": "aarch64",
+    "packaged_source": "8a7f2e73298a96888a715c367135cbeb2b3d4da0",
+    "prebuilt": true,
+    "pcmCruise": true,
+    "openpilotLongitudinalControl": false,
+    "minimum_steer_mps": 14.305279731750488,
+    "compiled_imports": "passed",
+    "packaged_mpc_initialization": "passed",
+    "hardware_tests": "not run"
+  },
+  "source_documentation_note": "Bundled source documentation is frozen at source_commit; ARM64_RELEASE.md and build_manifest.json record the later build results."
+}

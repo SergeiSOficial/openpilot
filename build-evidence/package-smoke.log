@@ -1,0 +1,12 @@
+kj/filesystem-disk-unix.c++:1728: warning: PWD environment variable seems invalid; pwd = /mnt/c/Users/sergeisavkin.REAMDA/Downloads/OpenPilotFork; *e = kj/filesystem-disk-unix.c++:1724: failed: lstat(result.toString(true).cStr(), &pwdStat): No such file or directory; result = mnt/c/Users/sergeisavkin.REAMDA/Downloads/OpenPilotFork
+{
+  "architecture": "aarch64",
+  "packaged_source": "8a7f2e73298a96888a715c367135cbeb2b3d4da0",
+  "prebuilt": true,
+  "pcmCruise": true,
+  "openpilotLongitudinalControl": false,
+  "minimum_steer_mps": 14.305279731750488,
+  "compiled_imports": "passed",
+  "packaged_mpc_initialization": "passed",
+  "hardware_tests": "not run"
+}

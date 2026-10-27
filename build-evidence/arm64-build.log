@@ -1,0 +1,274 @@
+{
+  "architecture": "aarch64",
+  "agnos_version": "19.9",
+  "packages": {
+    "scons": "4.10.1",
+    "numpy": "2.5.1",
+    "pycapnp": "2.1.0",
+    "comma-deps-capnproto": "1.0.1.post98",
+    "comma-deps-acados": "0.2.2.post98",
+    "comma-deps-ffmpeg": "7.1.0.post98",
+    "comma-deps-json11": "20170411.0.post98",
+    "comma-deps-zstd": "1.5.6.post98",
+    "comma-deps-zeromq": "4.3.5.post98",
+    "comma-deps-ncurses": "6.5.post98",
+    "comma-deps-libusb": "1.0.29.post98"
+  }
+}
+scons: Reading SConscript files ...
+scons: done reading SConscript files.
+scons: Building targets ...
+progress: 0.7
+progress: 1.5
+progress: 2.2
+progress: 3.0
+progress: 3.7
+progress: 4.5
+progress: 5.2
+progress: 5.9
+progress: 6.7
+  [CXX] openpilot/common/params.o
+progress: 7.4
+  [CXX] openpilot/common/swaglog.o
+progress: 8.2
+  [CXX] openpilot/common/util.o
+  [CXX] openpilot/common/ratekeeper.o
+progress: 8.9
+  [CXX] openpilot/common/yuv.o
+progress: 9.7
+  [CXX] openpilot/common/params_c.os
+progress: 10.4
+  [CXX] openpilot/cereal/gen/cpp/car.capnp.o
+  [CXX] openpilot/cereal/gen/cpp/custom.capnp.o
+  [AR] openpilot/common/libcommon.a
+  [RANLIB] openpilot/common/libcommon.a
+  [CXX] openpilot/cereal/gen/cpp/deprecated.capnp.o
+progress: 11.1
+  [LINK] openpilot/common/libparams_c.so
+  [CXX] openpilot/cereal/gen/cpp/log.capnp.o
+progress: 11.9
+progress: 12.6
+progress: 13.4
+progress: 14.1
+progress: 14.9
+  [CXX] openpilot/cereal/messaging/bridge.o
+  [CXX] openpilot/cereal/messaging/msgq_to_zmq.o
+progress: 15.6
+  [CXX] openpilot/cereal/messaging/bridge_zmq.o
+progress: 16.3
+  [CXX] msgq_repo/msgq/ipc.os
+  [CXX] msgq_repo/msgq/event.os
+progress: 17.1
+  [CXX] msgq_repo/msgq/impl_msgq.os
+  [CXX] msgq_repo/msgq/impl_fake.os
+progress: 17.8
+  [CXX] msgq_repo/msgq/msgq.os
+progress: 18.6
+  [CXX] msgq_repo/msgq/visionipc/visionipc.os
+progress: 19.3
+  [CXX] msgq_repo/msgq/visionipc/visionipc_server.os
+  [CXX] msgq_repo/msgq/visionipc/visionipc_client.os
+progress: 20.1
+  [AR] msgq_repo/libmsgq.a
+  [CXX] msgq_repo/msgq/visionipc/visionbuf.os
+  [RANLIB] msgq_repo/libmsgq.a
+  [LINK] openpilot/cereal/messaging/bridge
+progress: 20.8
+cythonize msgq_repo/msgq/ipc_pyx.pyx
+progress: 21.5
+cythonize msgq_repo/msgq/visionipc/visionipc_pyx.pyx
+  [AR] msgq_repo/libvisionipc.a
+  [RANLIB] msgq_repo/libvisionipc.a
+progress: 22.3
+progress: 23.0
+progress: 23.8
+progress: 24.5
+progress: 25.3
+progress: 26.0
+progress: 26.7
+progress: 27.5
+progress: 28.2
+progress: 29.0
+progress: 29.7
+progress: 30.5
+progress: 31.2
+progress: 31.9
+progress: 32.7
+progress: 33.4
+progress: 34.2
+progress: 34.9
+progress: 35.7
+progress: 36.4
+progress: 37.1
+progress: 37.9
+progress: 38.6
+progress: 39.4
+progress: 40.1
+progress: 40.9
+progress: 41.6
+progress: 42.3
+progress: 43.1
+progress: 43.8
+progress: 44.6
+progress: 45.3
+progress: 46.1
+progress: 46.8
+progress: 47.5
+progress: 48.3
+progress: 49.0
+progress: 49.8
+progress: 50.5
+progress: 51.3
+progress: 52.0
+progress: 52.7
+progress: 53.5
+progress: 54.2
+progress: 55.0
+progress: 55.7
+progress: 56.5
+progress: 57.2
+progress: 57.9
+progress: 58.7
+  [CXX] rednose_repo/rednose/helpers/ekf_load.os
+progress: 59.4
+  [CXX] rednose_repo/rednose/helpers/ekf_sym.os
+progress: 60.2
+cythonize rednose_repo/rednose/helpers/ekf_sym_pyx.pyx
+  [AR] rednose_repo/rednose/helpers/libekf_sym.a
+  [RANLIB] rednose_repo/rednose/helpers/libekf_sym.a
+progress: 60.9
+progress: 61.7
+progress: 62.4
+  [CXX] openpilot/system/loggerd/bootlog.o
+  [CXX] openpilot/system/loggerd/logger.o
+progress: 63.2
+  [CXX] openpilot/system/loggerd/zstd_writer.o
+progress: 63.9
+progress: 64.6
+progress: 65.4
+progress: 66.1
+progress: 66.9
+progress: 67.6
+progress: 68.4
+  [CXX] openpilot/system/loggerd/video_writer.o
+  [CXX] openpilot/system/loggerd/encoder/encoder.o
+progress: 69.1
+  [CXX] openpilot/system/loggerd/encoder/jpeg_encoder.o
+progress: 69.8
+  [CXX] openpilot/system/loggerd/clip_encoder.o
+  [CXX] openpilot/system/loggerd/encoder/v4l_encoder.o
+progress: 70.6
+  [CXX] openpilot/system/loggerd/encoder/v4l_decoder.o
+  [AR] openpilot/system/loggerd/liblogger.a
+  [RANLIB] openpilot/system/loggerd/liblogger.a
+progress: 71.3
+progress: 72.1
+  [LINK] openpilot/system/loggerd/bootlog
+progress: 72.8
+  [CXX] openpilot/system/loggerd/encoderd.o
+progress: 73.6
+  [LINK] openpilot/system/loggerd/encoderd
+  [CXX] openpilot/system/loggerd/loggerd.o
+Compiling /data/openpilot/msgq_repo/msgq/ipc_pyx.pyx because it changed.
+[1/1] Cythonizing /data/openpilot/msgq_repo/msgq/ipc_pyx.pyx
+  [LINK] openpilot/system/loggerd/loggerd
+progress: 74.3
+  [CXX] openpilot/system/camerad/main.o
+progress: 75.0
+progress: 75.8
+  [CXX] openpilot/system/camerad/cameras/camera_qcom2.o
+progress: 76.5
+progress: 77.3
+progress: 78.0
+progress: 78.8
+progress: 79.5
+progress: 80.2
+progress: 81.0
+progress: 81.7
+progress: 82.5
+progress: 83.2
+progress: 84.0
+progress: 84.7
+progress: 85.4
+progress: 86.2
+progress: 86.9
+progress: 87.7
+progress: 88.4
+progress: 89.2
+progress: 89.9
+progress: 90.6
+progress: 91.4
+progress: 92.1
+progress: 92.9
+  [CXX] msgq_repo/msgq/ipc_pyx.o
+  [CXX] openpilot/system/camerad/cameras/camera_common.o
+  [LINK] msgq_repo/msgq/ipc_pyx.so
+progress: 93.6
+progress: 94.4
+  [CXX] openpilot/system/camerad/cameras/spectra.o
+  [CXX] openpilot/system/camerad/cameras/cdm.o
+  [CXX] openpilot/system/camerad/sensors/ox03c10.o
+progress: 95.1
+  [CXX] openpilot/system/camerad/sensors/os04c10.o
+progress: 95.8
+progress: 96.6
+  [CXX] openpilot/selfdrive/pandad/panda.o
+  [LINK] openpilot/system/camerad/camerad
+progress: 97.3
+  [CXX] openpilot/selfdrive/pandad/spi.o
+progress: 98.1
+  [CXX] openpilot/selfdrive/pandad/main.o
+  [AR] openpilot/selfdrive/pandad/libpanda.a
+  [RANLIB] openpilot/selfdrive/pandad/libpanda.a
+  [CXX] openpilot/selfdrive/pandad/panda_safety.o
+progress: 98.8
+  [CXX] openpilot/selfdrive/pandad/pandad.o
+Compiling /data/openpilot/msgq_repo/msgq/visionipc/visionipc_pyx.pyx because it changed.
+[1/1] Cythonizing /data/openpilot/msgq_repo/msgq/visionipc/visionipc_pyx.pyx
+progress: 99.6
+progress: 100.0
+cd /data/openpilot/openpilot/selfdrive/controls/lib/longitudinal_mpc_lib && python3 long_mpc.py
+  [LINK] openpilot/selfdrive/pandad/pandad
+Mkdir("openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code")
+Copy("openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/libacados.so", "/usr/local/venv/lib/python3.12/site-packages/acados/install/lib/libacados.so")
+Mkdir("openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code")
+Copy("openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/libblasfeo.so", "/usr/local/venv/lib/python3.12/site-packages/acados/install/lib/libblasfeo.so")
+Mkdir("openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code")
+Copy("openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/libhpipm.so", "/usr/local/venv/lib/python3.12/site-packages/acados/install/lib/libhpipm.so")
+Mkdir("openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code")
+Copy("openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/libqpOASES_e.so.3.1", "/usr/local/venv/lib/python3.12/site-packages/acados/install/lib/libqpOASES_e.so.3.1")
+openpilot/selfdrive/locationd/models/car_kf.py car openpilot/selfdrive/locationd/models/generated
+  [CXX] msgq_repo/msgq/visionipc/visionipc_pyx.o
+  [LINK] msgq_repo/msgq/visionipc/visionipc_pyx.so
+openpilot/selfdrive/locationd/models/pose_kf.py pose openpilot/selfdrive/locationd/models/generated
+Compiling /data/openpilot/rednose_repo/rednose/helpers/ekf_sym_pyx.pyx because it changed.
+[1/1] Cythonizing /data/openpilot/rednose_repo/rednose/helpers/ekf_sym_pyx.pyx
+  [CXX] rednose_repo/rednose/helpers/ekf_sym_pyx.o
+Warning: Please note that the following versions of CasADi  are officially supported: 3.5.6 or 3.5.5 or 3.5.4 or 3.5.3 or 3.5.2 or 3.5.1 or 3.4.5 or 3.4.0.
+ If there is an incompatibility with the CasADi generated code, please consider changing your CasADi version.
+Version 3.6.7 currently in use.
+  [CC] openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/long_cost/long_cost_y_0_fun_jac_ut_xt.os
+  [CC] openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/long_cost/long_cost_y_fun.os
+  [LINK] rednose_repo/rednose/helpers/ekf_sym_pyx.so
+  [CC] openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/long_constraints/long_constr_h_fun_jac_uxt_zt.os
+  [CC] openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/long_cost/long_cost_y_e_fun.os
+  [CC] openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/long_cost/long_cost_y_0_fun.os
+  [CC] openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/long_model/long_expl_vde_forw.os
+cython -o /data/openpilot/openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/acados_ocp_solver_pyx.c -I /data/openpilot/openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code -I /usr/local/venv/lib/python3.12/site-packages/acados/acados_template /usr/local/venv/lib/python3.12/site-packages/acados/acados_template/acados_ocp_solver_pyx.pyx
+  [CC] openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/long_constraints/long_constr_h_fun.os
+  [CC] openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/long_cost/long_cost_y_hess.os
+  [CXX] openpilot/selfdrive/locationd/models/generated/car.os
+  [CC] openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/long_cost/long_cost_y_e_hess.os
+  [CC] openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/long_model/long_expl_ode_fun.os
+  [CC] openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/long_cost/long_cost_y_0_hess.os
+  [CC] openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/long_cost/long_cost_y_fun_jac_ut_xt.os
+  [CC] openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/long_cost/long_cost_y_e_fun_jac_ut_xt.os
+  [CC] openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/acados_solver_long.os
+  [LINK] openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/libacados_ocp_solver_long.so
+  [LINK] openpilot/selfdrive/locationd/models/generated/libcar.so
+scons: `openpilot/selfdrive/ui' is up to date.
+  [CXX] openpilot/selfdrive/locationd/models/generated/pose.os
+  [LINK] openpilot/selfdrive/locationd/models/generated/libpose.so
+  [CC] openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/acados_ocp_solver_pyx.o
+  [LINK] openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code/acados_ocp_solver_pyx.so
+scons: done building targets.

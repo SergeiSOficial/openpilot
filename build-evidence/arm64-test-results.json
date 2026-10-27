@@ -1,0 +1,62 @@
+{
+  "architecture": "aarch64",
+  "results": [
+    {
+      "name": "compiled-imports",
+      "returncode": 0,
+      "seconds": 2.9,
+      "summary": [],
+      "log": "/data/arm64-compiled-imports.log"
+    },
+    {
+      "name": "hyundai-firmware-safety",
+      "returncode": 0,
+      "seconds": 111.64,
+      "summary": [
+        "Ran 422 tests in 107.953s",
+        "OK (skipped=194)"
+      ],
+      "log": "/data/arm64-hyundai-firmware-safety.log"
+    },
+    {
+      "name": "ioniq-baseline",
+      "returncode": 0,
+      "seconds": 2.94,
+      "summary": [
+        "Ran 4 tests in 0.793s",
+        "OK"
+      ],
+      "log": "/data/arm64-ioniq-baseline.log"
+    },
+    {
+      "name": "ioniq-route",
+      "returncode": 0,
+      "seconds": 89.2,
+      "summary": [
+        "Ran 7 tests in 86.982s",
+        "OK"
+      ],
+      "log": "/data/arm64-ioniq-route.log"
+    },
+    {
+      "name": "ioniq-interfaces",
+      "returncode": 0,
+      "seconds": 11.22,
+      "summary": [
+        "2 passed in 10.42s"
+      ],
+      "log": "/data/arm64-ioniq-interfaces.log"
+    }
+  ],
+  "passed": true,
+  "previous_attempts": [
+    {
+      "name": "ioniq-interfaces",
+      "returncode": 1,
+      "seconds": 2.46,
+      "summary": [],
+      "log": "/data/arm64-ioniq-interfaces.log"
+    }
+  ],
+  "hardware_checks": "Not run: QCOM GPU, cameras, real CAN, onroad timing and vehicle acceptance require hardware."
+}

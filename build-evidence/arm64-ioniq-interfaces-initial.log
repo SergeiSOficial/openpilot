@@ -1,0 +1,35 @@
+collected 0 tests in 1.74s • 0 workers
+
+======== COLLECTION ERROR 1 ========
+Failed to collect openpilot.selfdrive.car.tests.test_car_interfaces
+Traceback (most recent call last):
+  File "/data/openpilot/tools/test_runner.py", line 164, in collect
+    suite = loader.loadTestsFromName(name)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/openpilot/openpilot/selfdrive/car/tests/test_car_interfaces.py", line 1, in <module>
+    from openpilot.common.test import OpenpilotTestCase
+  File "/data/openpilot/openpilot/common/test.py", line 11, in <module>
+    from openpilot.system.manager import manager
+  File "/data/openpilot/openpilot/system/manager/manager.py", line 18, in <module>
+    from openpilot.system.athena.registration import register, UNREGISTERED_DONGLE_ID
+  File "/data/openpilot/openpilot/system/athena/registration.py", line 12, in <module>
+    from openpilot.selfdrive.selfdrived.alertmanager import set_offroad_alert
+  File "/data/openpilot/openpilot/selfdrive/selfdrived/alertmanager.py", line 9, in <module>
+    from openpilot.selfdrive.selfdrived.events import Alert, EmptyAlert
+  File "/data/openpilot/openpilot/selfdrive/selfdrived/events.py", line 14, in <module>
+    from openpilot.selfdrive.locationd.calibrationd import MIN_SPEED_FILTER
+  File "/data/openpilot/openpilot/selfdrive/locationd/calibrationd.py", line 42, in <module>
+    if HARDWARE.get_device_type() == 'mici':
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/openpilot/openpilot/common/hardware/comma/hardware.py", line 90, in get_device_type
+    return get_device_type()
+           ^^^^^^^^^^^^^^^^^
+  File "/data/openpilot/openpilot/common/hardware/comma/hardware.py", line 37, in get_device_type
+    with open("/sys/firmware/devicetree/base/model") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/sys/firmware/devicetree/base/model'
+
+1 collection error in 1.74s

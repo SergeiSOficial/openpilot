@@ -1,0 +1,8 @@
+collected 2 tests in 2.48s • 1 worker
+..
+
+slowest tests
+    3.96s  openpilot.selfdrive.car.tests.test_car_interfaces.TestCarInterfaces.test_car_interfaces_103_HYUNDAI_IONIQ_PHEV_2019
+    3.93s  openpilot.selfdrive.car.tests.test_car_interfaces.TestCarInterfaces.test_car_interfaces_102_HYUNDAI_IONIQ_PHEV
+
+2 passed in 10.42s

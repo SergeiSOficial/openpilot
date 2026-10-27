@@ -1,0 +1,40 @@
+{
+  "official_prebuilt_commit": "f7db927c728bab57bb1263e05465766a8f28fc9d",
+  "official_git_src_commit": "a3a56b3aa4958ed9c45ed520c24b36bfe7cfa27c",
+  "validated_base": "6939d172e85e3b91f16d90cc8de72e8f938cc196",
+  "tinygrad_repo": {
+    "revision": "02e698160eed1751738212144a7ea2cfb160b3f1",
+    "files_checked": 1667,
+    "mismatches": [
+      "tinygrad_repo/.github/workflows/autogen.yml",
+      "tinygrad_repo/.github/workflows/benchmark.yml",
+      "tinygrad_repo/.github/workflows/benchmark_search.yml",
+      "tinygrad_repo/.github/workflows/docs.yml",
+      "tinygrad_repo/.github/workflows/mlperf.yml",
+      "tinygrad_repo/.github/workflows/platform.yml",
+      "tinygrad_repo/.github/workflows/python-publish.yml",
+      "tinygrad_repo/.github/workflows/szdiff.yml",
+      "tinygrad_repo/.github/workflows/test.yml"
+    ]
+  },
+  "panda": {
+    "revision": "a59195163c32a3a375ea6c86715dc08fd0984c1b",
+    "files_checked": 176,
+    "mismatches": [
+      "panda/.gitattributes",
+      "panda/.github/workflows/jenkins-pr-trigger.yaml",
+      "panda/.github/workflows/test.yaml"
+    ]
+  },
+  "model_dependency_mismatches": [],
+  "driving_supercombo.onnx": {
+    "expected_sha256": "65a08adc31d5c456219687d99b7bf5e44d61dae2d49ea67850e76105c7248cce",
+    "official_sha256": null,
+    "match": false
+  },
+  "dmonitoring_model.onnx": {
+    "expected_sha256": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+    "official_sha256": null,
+    "match": false
+  }
+}

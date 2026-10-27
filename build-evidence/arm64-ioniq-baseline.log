@@ -1,0 +1,14 @@
+Using cached CarParams
+VIN KMHC75LD0KU123456
+{'event': 'fingerprinted', 'car_fingerprint': 'None', 'source': 0, 'fuzzy': False, 'cached': True, 'fw_count': 20, 'ecu_responses': [], 'vin_rx_addr': -1, 'vin_rx_bus': -1, 'fingerprints': '{0: {}, 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {}, 7: {}}', 'fw_query_time': 0.012261287000001175}
+{'event': "car doesn't match any fingerprints", 'fingerprints': '{0: {}, 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {}, 7: {}}'}
+.Exact firmware combinations verified: 108
+..Using cached CarParams
+VIN KMHC75LD0KU123456
+{'event': 'fingerprinted', 'car_fingerprint': 'None', 'source': 0, 'fuzzy': False, 'cached': True, 'fw_count': 3, 'ecu_responses': [], 'vin_rx_addr': -1, 'vin_rx_bus': -1, 'fingerprints': '{0: {}, 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {}, 7: {}}', 'fw_query_time': 0.029130724999959057}
+{'event': "car doesn't match any fingerprints", 'fingerprints': '{0: {}, 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {}, 7: {}}'}
+.
+----------------------------------------------------------------------
+Ran 4 tests in 0.793s
+
+OK
