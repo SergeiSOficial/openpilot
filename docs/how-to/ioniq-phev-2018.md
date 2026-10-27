@@ -227,7 +227,9 @@ disengaged recording cannot establish engagement or driving behavior.
 | LFS asset integrity | All 262 pinned objects pass `git lfs fsck --objects HEAD` in both checkouts |
 | Checks in the built, locked environment | Compiled bindings import; 422 Hyundai/firmware/safety tests (194 skipped); 2 openpilot PHEV interface tests; C++ logging smoke test: all passed |
 | Incremental build review | Dry run succeeds; only the deliberately always-built `compile_commands.json` is scheduled |
-| comma four ARM64 build / deployment and vehicle acceptance | Not performed |
+| Comma four ARM64 application build | Completed using the pinned AGNOS 19.9 image, QEMU orchestration, and Clang 18 cross compilation |
+| ARM64 software checks | 241 passed, 194 skipped; packaged imports and MPC initialization passed; all 18 packaged ELF files are AArch64 |
+| Device deployment and vehicle acceptance | Not performed |
 
 The initial software checks used the unmodified pinned opendbc source exported to
 a native WSL Linux directory. The full build and subsequent checks used the
@@ -282,27 +284,45 @@ The incremental dry run confirms that compiled targets are current. `scons -q`
 returns 1 because the upstream compilation-database builder deliberately marks
 `compile_commands.json` with `AlwaysBuild`; this is not a failed compiler target.
 
-### Comma four ARM64 release prerequisites
+### Comma four ARM64 release candidate
 
-An ARM64 release has not been built or published from this source branch. The
-available WSL builder is x86_64, has no AGNOS installation or configured comma
-four target, and has no production release-signing asset. The GitHub workflow
-named `build_release` also uses an amd64 host; its name does not establish a
-comma four build.
+An ARM64 application candidate was built from source commit
+`8a7f2e73298a96888a715c367135cbeb2b3d4da0`. The application, Hyundai port, and
+safety implementation are unchanged from the validated runtime base. The
+candidate branch is `ioniq-phev-2018-release-mici`; it is separate from existing
+release branches and is not a hardware-approved production release.
 
-The stock `tools/release/build_release.sh` requires an ARM64 AGNOS build/test
-device, the target-specific runtime and GPU/model compilation environment,
-release signing at `/data/pandaextra/certs/release`, and the device
-`test_onroad.py` gate. Do not substitute host binaries, spoof `/AGNOS`, skip
-device tests, or silently switch to debug firmware to label a host build as a
-device release.
+The build uses the real AGNOS 19.9 system image pinned in this source tree.
+Its sparse and raw hashes were verified, and the extracted root runs AArch64
+programs under QEMU. Build orchestration and code generation run in that
+environment; native Clang 18.1.3 cross-compiles for AArch64/cortex-a57 against
+the same device SDK. This avoids interpreting the compiler itself in QEMU.
+Thirteen required executables/libraries resolve all dynamic dependencies in
+AGNOS, and all 18 packaged ELF files are AArch64. The packaged bindings and
+MPC solver also initialize in the emulated deployment root.
 
-Use a dedicated build device and a source checkout outside `/data/openpilot`:
-the stock script recreates that directory and force-pushes its configured
-destination. Preserve any existing device installation before using that
-pipeline. A custom prebuilt destination should be a distinct branch such as
-`ioniq-phev-2018-release-mici`, not an existing upstream or fork release branch.
-Target access and signing setup are required before that pipeline can be run.
+Qualcomm GPU model artifacts are reused upstream builds. The driving model,
+camera transforms, and tinygrad runtime match the pinned source. The official
+release's driver-monitoring checkpoint differs and was rejected; the matching
+QCOM artifact comes from upstream commit
+`de73842a2fedb82b4a0f8a3101189dde1b29ebf3`, with the validated checkpoint
+`a9462a65-1886-462a-8847-ad4624d9abfc/200`, full metadata, shapes, and runtime.
+This does not claim fresh QCOM compilation or GPU execution under emulation.
+Existing upstream panda firmware was reused unchanged, with release RSA
+signatures verified against the pinned public key. No private signing key or
+debug firmware was substituted.
+
+ARM64 software validation passed 241 tests with 194 skips, including the 2019
+PHEV route. The emulator provides the virtual device-tree label `comma mici`
+for software configuration; no physical hardware is represented as tested.
+The stock release pipeline's device `test_onroad.py` gate, real camera/GPU/CAN,
+timing, installation, and 2018 vehicle checks remain pending.
+
+The candidate contains `ARM64_RELEASE.md`, `build_manifest.json`, `SHA256SUMS`,
+and per-suite evidence. Its bundled source guide is frozen at the build source
+commit; the generated manifest and release notes record subsequent build
+results. Local artifacts are retained under
+`/home/dey/.cache/ioniq-phev-2018/arm64/` in Ubuntu-24.04 WSL.
 
 ### Extended WSL validation
 
