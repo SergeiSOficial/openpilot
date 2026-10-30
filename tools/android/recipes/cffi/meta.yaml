@@ -1,0 +1,13 @@
+package:
+  name: cffi
+  version: "2.1.1"
+source: pypi
+build:
+  number: 0
+requirements:
+  build:
+    - setuptools 84.2.1
+    - pycparser 3.0
+  host:
+    - python
+    - chaquopy-libffi 3.4.6

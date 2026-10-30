@@ -5,7 +5,7 @@
 #include "common/params.h"
 #include "selfdrive/pandad/panda.h"
 
-void pandad_main_thread(std::string serial);
+void pandad_main_thread(std::string serial, PandaTransport transport=PandaTransport::AUTO);
 
 class PandaSafety {
 public:

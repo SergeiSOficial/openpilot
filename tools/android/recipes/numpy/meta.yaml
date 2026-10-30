@@ -1,0 +1,12 @@
+package:
+  name: numpy
+  version: "2.5.3"
+source: pypi
+build:
+  number: 0
+requirements:
+  build:
+    - Cython 3.3.0
+    - build 1.5.0
+  host:
+    - python

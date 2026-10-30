@@ -12,11 +12,24 @@
 
 const bool PANDAD_MAXOUT = getenv("PANDAD_MAXOUT") != nullptr;
 
-Panda::Panda(std::string serial) {
-  handle = std::make_unique<PandaSpiHandle>(serial);
-  LOGW("connected to %s over SPI", serial.c_str());
+Panda::Panda(std::string serial, PandaTransport transport) {
+  if (transport != PandaTransport::USB) {
+    try {
+      handle = std::make_unique<PandaSpiHandle>(serial);
+    } catch (const std::exception &) {
+      if (transport == PandaTransport::SPI) throw;
+    }
+  }
+  if (!handle) {
+    handle = std::make_unique<PandaUsbHandle>(serial);
+    transport = PandaTransport::USB;
+  }
+  LOGW("connected to %s over %s", handle->hw_serial.c_str(), transport == PandaTransport::USB ? "USB" : "SPI");
 
   hw_type = get_hw_type();
+  if (transport == PandaTransport::USB && hw_type != cereal::PandaState::PandaType::RED_PANDA) {
+    throw std::runtime_error("USB control requires a Red Panda");
+  }
   can_reset_communications();
 }
 
@@ -32,8 +45,12 @@ std::string Panda::hw_serial() {
   return handle->hw_serial;
 }
 
-std::vector<std::string> Panda::list() {
-  return PandaSpiHandle::list();
+std::vector<std::string> Panda::list(PandaTransport transport) {
+  if (transport != PandaTransport::USB) {
+    auto serials = PandaSpiHandle::list();
+    if (!serials.empty() || transport == PandaTransport::SPI) return serials;
+  }
+  return PandaUsbHandle::list();
 }
 
 void Panda::set_safety_model(cereal::CarParams::SafetyModel safety_model, uint16_t safety_param) {
@@ -66,7 +83,9 @@ void Panda::set_uart_baud(int uart, int rate) {
 cereal::PandaState::PandaType Panda::get_hw_type() {
   unsigned char hw_query[1] = {0};
 
-  handle->control_read(0xc1, 0, 0, hw_query, 1);
+  if (handle->control_read(0xc1, 0, 0, hw_query, 1) != 1) {
+    throw std::runtime_error("Failed to read Panda hardware type");
+  }
   return (cereal::PandaState::PandaType)(hw_query[0]);
 }
 
@@ -87,13 +106,13 @@ void Panda::set_ir_pwr(uint16_t ir_pwr) {
 std::optional<health_t> Panda::get_state() {
   health_t health {0};
   int err = handle->control_read(0xd2, 0, 0, (unsigned char*)&health, sizeof(health));
-  return err >= 0 ? std::make_optional(health) : std::nullopt;
+  return err == sizeof(health) ? std::make_optional(health) : std::nullopt;
 }
 
 std::optional<can_health_t> Panda::get_can_state(uint16_t can_number) {
   can_health_t can_health {0};
   int err = handle->control_read(0xc2, can_number, 0, (unsigned char*)&can_health, sizeof(can_health));
-  return err >= 0 ? std::make_optional(can_health) : std::nullopt;
+  return err == sizeof(can_health) ? std::make_optional(can_health) : std::nullopt;
 }
 
 void Panda::set_loopback(bool loopback) {

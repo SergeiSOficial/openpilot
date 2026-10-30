@@ -19,6 +19,9 @@ namespace Path {
   }
 
   inline std::string comma_home() {
+    if (const char *root = getenv("OPENPILOT_ANDROID_ROOT")) {
+      return std::string(root) + "/home" + Path::openpilot_prefix();
+    }
     return util::getenv("HOME") + "/.comma" + Path::openpilot_prefix();
   }
 
@@ -38,10 +41,16 @@ namespace Path {
   }
 
   inline std::string swaglog_ipc() {
+    if (const char *root = getenv("OPENPILOT_ANDROID_ROOT")) {
+      return "ipc://" + std::string(root) + "/tmp/log" + Path::openpilot_prefix();
+    }
     return "ipc:///tmp/logmessage" + Path::openpilot_prefix();
   }
 
   inline std::string download_cache_root() {
+    if (const char *root = getenv("OPENPILOT_ANDROID_ROOT")) {
+      return std::string(root) + "/cache/";
+    }
     if (const char *env = getenv("COMMA_CACHE")) {
       return env;
     }
@@ -49,6 +58,9 @@ namespace Path {
   }
 
  inline std::string shm_path() {
+    if (const char *root = getenv("OPENPILOT_ANDROID_ROOT")) {
+      return std::string(root) + "/shm";
+    }
     #ifdef __APPLE__
      return"/tmp";
     #else

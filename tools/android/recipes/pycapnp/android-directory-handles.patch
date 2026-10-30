@@ -1,0 +1,22 @@
+--- a/bundled/capnproto-c++/src/kj/filesystem-disk-unix.c++
++++ b/bundled/capnproto-c++/src/kj/filesystem-disk-unix.c++
+@@ -1701,8 +1701,17 @@
+   Path currentPath;
+ 
+   static AutoCloseFd openDir(const char* dir) {
+-    int newFd;
+-    KJ_SYSCALL(newFd = open(dir, O_RDONLY | MAYBE_O_CLOEXEC | MAYBE_O_DIRECTORY));
++    int newFd = -1;
++    int flags = O_RDONLY | MAYBE_O_CLOEXEC | MAYBE_O_DIRECTORY;
++#if defined(__ANDROID__) && defined(O_PATH)
++    // Untrusted Android apps can traverse / but cannot open it for directory reads.
++    // Schema lookup needs an openat anchor, which O_PATH provides without listing it.
++    newFd = open(dir, flags);
++    if (newFd < 0 && errno == EACCES) flags = O_PATH | MAYBE_O_CLOEXEC | MAYBE_O_DIRECTORY;
++#endif
++    if (newFd < 0) {
++      KJ_SYSCALL(newFd = open(dir, flags));
++    }
+     AutoCloseFd result(newFd);
+ #ifndef O_CLOEXEC
+     setCloexec(result);

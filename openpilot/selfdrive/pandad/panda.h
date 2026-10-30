@@ -45,10 +45,10 @@ struct can_frame {
 
 class Panda {
 private:
-  std::unique_ptr<PandaSpiHandle> handle;
+  std::unique_ptr<PandaCommsHandle> handle;
 
 public:
-  Panda(std::string serial);
+  Panda(std::string serial, PandaTransport transport=PandaTransport::AUTO);
 
   cereal::PandaState::PandaType hw_type = cereal::PandaState::PandaType::UNKNOWN;
 
@@ -57,7 +57,7 @@ public:
   std::string hw_serial();
 
   // Static functions
-  static std::vector<std::string> list();
+  static std::vector<std::string> list(PandaTransport transport=PandaTransport::AUTO);
 
   // Panda functionality
   cereal::PandaState::PandaType get_hw_type();

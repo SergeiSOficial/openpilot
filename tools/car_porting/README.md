@@ -2,6 +2,10 @@
 
 Check out [this blog post](https://blog.comma.ai/how-to-write-a-car-port-for-openpilot/) for a high-level overview of porting a car.
 
+For the UK/Ireland 2018 Ioniq PHEV on comma four, see the
+[stable baseline and vehicle verification runbook](../../docs/how-to/ioniq-phev-2018.md).
+Its 2019 platform mapping remains a candidate until the target car is verified.
+
 ## Useful car porting utilities
 
 Testing car ports in your car is very time-consuming. Check out these utilities to do basic checks on your work before running it in your car.

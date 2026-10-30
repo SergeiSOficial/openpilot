@@ -1,0 +1,13 @@
+package:
+  name: msgq
+  version: "0.0.1"
+source:
+  path: source
+build:
+  number: 0
+requirements:
+  build:
+    - Cython 3.3.0
+    - setuptools 69.1.1
+  host:
+    - python

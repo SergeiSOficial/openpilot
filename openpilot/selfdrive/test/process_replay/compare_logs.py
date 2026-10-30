@@ -5,8 +5,6 @@ import capnp
 import numbers
 from collections import Counter
 
-from openpilot.tools.lib.logreader import LogReader
-
 EPSILON = sys.float_info.epsilon
 
 _DynamicStructReader = capnp.lib.capnp._DynamicStructReader
@@ -178,6 +176,7 @@ def format_diff(results, log_paths, ref_commit):
 
 
 if __name__ == "__main__":
+  from openpilot.tools.lib.logreader import LogReader
   log1 = list(LogReader(sys.argv[1]))
   log2 = list(LogReader(sys.argv[2]))
   ignore_fields = sys.argv[3:] or ["logMonoTime"]

@@ -1,0 +1,49 @@
+--- a/openpilot/cereal/custom.capnp
++++ b/openpilot/cereal/custom.capnp
+@@ -1,4 +1,4 @@
+-using Cxx = import "/include/c++.capnp";
++using Cxx = import "/capnp/c++.capnp";
+ $Cxx.namespace("cereal");
+ 
+ @0xb526ba661d550a59;
+--- a/openpilot/cereal/deprecated.capnp
++++ b/openpilot/cereal/deprecated.capnp
+@@ -1,4 +1,4 @@
+-using Cxx = import "/include/c++.capnp";
++using Cxx = import "/capnp/c++.capnp";
+ $Cxx.namespace("cereal");
+ 
+ @0x80ef1ec4889c2a63;
+--- a/openpilot/cereal/log.capnp
++++ b/openpilot/cereal/log.capnp
+@@ -1,4 +1,4 @@
+-using Cxx = import "/include/c++.capnp";
++using Cxx = import "/capnp/c++.capnp";
+ $Cxx.namespace("cereal");
+ 
+ using Car = import "/car.capnp";
+--- a/opendbc/car/car.capnp
++++ b/opendbc/car/car.capnp
+@@ -1,4 +1,4 @@
+-using Cxx = import "/include/c++.capnp";
++using Cxx = import "/capnp/c++.capnp";
+ $Cxx.namespace("cereal");
+ 
+ @0x8e2af1e708af8b8d;
+--- a/opendbc/car/structs.py
++++ b/opendbc/car/structs.py
+@@ -3,7 +3,13 @@
+ from opendbc.car.common.basedir import BASEDIR
+ 
+ capnp.remove_import_hook()
+-car = capnp.load(os.path.join(BASEDIR, "car.capnp"), imports=[BASEDIR])
++imports = [BASEDIR]
++schema_path = BASEDIR
++if os.environ.get("OPENPILOT_ANDROID_ROOT"):
++  schema_path = os.environ["OPENPILOT_ANDROID_SCHEMAS"]
++  imports = [schema_path]
++  imports.append(os.path.dirname(os.path.dirname(os.path.realpath(capnp.__file__))))
++car = capnp.load(os.path.join(schema_path, "car.capnp"), imports=imports)
+ 
+ CarState = car.CarState
+ RadarData = car.RadarData

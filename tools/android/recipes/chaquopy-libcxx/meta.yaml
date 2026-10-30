@@ -1,0 +1,6 @@
+package:
+  name: chaquopy-libcxx
+  version: "190000"
+source: null
+build:
+  number: 0

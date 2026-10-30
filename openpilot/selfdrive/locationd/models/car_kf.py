@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import math
+import os
 import sys
 from typing import Any
 
@@ -164,6 +165,7 @@ class CarKalman(KalmanFilter):
     gen_code(generated_dir, name, f_sym, dt, state_sym, obs_eqs, dim_state, dim_state, global_vars=global_vars)
 
   def __init__(self, generated_dir):
+    generated_dir = os.environ.get("OPENPILOT_ANDROID_NATIVE_DIR", generated_dir)
     dim_state, dim_state_err = CarKalman.initial_x.shape[0], CarKalman.P_initial.shape[0]
     self.filter = EKF_sym_pyx(generated_dir, CarKalman.name, CarKalman.Q, CarKalman.initial_x, CarKalman.P_initial,
                               dim_state, dim_state_err, global_vars=CarKalman.global_vars, logger=cloudlog)

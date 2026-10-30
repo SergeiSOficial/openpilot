@@ -1,0 +1,11 @@
+package:
+  name: pycryptodome
+  version: "3.23.0"
+source: pypi
+build:
+  number: 0
+requirements:
+  build:
+    - setuptools 84.2.1
+  host:
+    - python

@@ -1,9 +1,21 @@
 import numpy as np
+import os
 from openpilot.selfdrive.modeld.constants import ModelConstants
 
 def safe_exp(x, out=None):
   # -11 is around 10**14, more causes float16 overflow
-  return np.exp(np.clip(x, -np.inf, 11), out=out)
+  clipped = np.clip(x, -np.inf, 11)
+  if os.environ.get('OPENPILOT_ANDROID_ROOT') and clipped.dtype == np.float32:
+    # NumPy's CPU-specific vector exp differs by an ulp across x86 and ARM.
+    # Round scalar binary64 exp to float32 identically for the Android port and
+    # its desktop reference, including probabilities forwarded verbatim to radar.
+    import math
+    result = np.fromiter((math.exp(float(value)) for value in clipped.flat), dtype=np.float32, count=clipped.size).reshape(clipped.shape)
+    if out is not None:
+      np.copyto(out, result)
+      return out
+    return result
+  return np.exp(clipped, out=out)
 
 def sigmoid(x):
   return 1. / (1. + safe_exp(-x))

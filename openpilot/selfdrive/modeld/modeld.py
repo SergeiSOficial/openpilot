@@ -190,6 +190,10 @@ class ModelState:
 
   def run(self, bufs: dict[str, VisionBuf], transforms: dict[str, np.ndarray],
           inputs: dict[str, np.ndarray], after_enqueue: Callable[[], None] | None = None) -> dict[str, np.ndarray]:
+    if os.environ.get('OPENPILOT_ANDROID_ROOT'):
+      for name, transform in transforms.items():
+        if not np.all(np.isfinite(transform)) or abs(np.linalg.det(transform)) < 1e-9:
+          raise ValueError(f"Invalid Android model camera transform: {name}")
     for i, key in enumerate(self.vision_input_names):
       np.copyto(self.frames[i], np.frombuffer(bufs[key].data, dtype=np.uint8, count=self.frame_copy_size))
       self.npy['tfm'][i] = transforms[key]
@@ -209,7 +213,7 @@ class ModelState:
     if after_enqueue is not None:
       after_enqueue()
     model_output = self.outputs['outputs'].numpy()[0]
-    if self.chestnut and not np.all(np.isfinite(model_output)):
+    if (self.chestnut or os.environ.get('OPENPILOT_ANDROID_ROOT')) and not np.all(np.isfinite(model_output)):
       raise RuntimeError("model output not finite")
     outputs_dict = self.parser.parse_outputs(self.slice_outputs(model_output, self.output_slices))
 
@@ -231,7 +235,7 @@ class ModelState:
 def main(demo=False):
   cloudlog.warning("modeld init")
 
-  CHESTNUT = chestnut_compiled() and (chestnut_present() or cable_connected())
+  CHESTNUT = not os.environ.get('OPENPILOT_ANDROID_ROOT') and chestnut_compiled() and (chestnut_present() or cable_connected())
   if CHESTNUT:
     from tinygrad.runtime.ops_amd import AMDDevice
     AMDDevice.wait_timeout_ms = 3000

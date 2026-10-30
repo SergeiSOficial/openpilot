@@ -6,9 +6,20 @@ from openpilot.common.hardware import PC
 
 DEFAULT_DOWNLOAD_CACHE_ROOT = "/tmp/comma_download_cache"
 
+def android_root() -> Path | None:
+  value = os.environ.get("OPENPILOT_ANDROID_ROOT")
+  if value is None:
+    return None
+  root = Path(value)
+  if not root.is_absolute():
+    raise ValueError("OPENPILOT_ANDROID_ROOT must be absolute")
+  return root
+
 class Paths:
   @staticmethod
   def comma_home() -> str:
+    if (root := android_root()) is not None:
+      return str(root / ("home" + os.environ.get("OPENPILOT_PREFIX", "")))
     return os.path.join(str(Path.home()), ".comma" + os.environ.get("OPENPILOT_PREFIX", ""))
 
   @staticmethod
@@ -29,10 +40,14 @@ class Paths:
 
   @staticmethod
   def swaglog_ipc() -> str:
+    if (root := android_root()) is not None:
+      return "ipc://" + str(root / "tmp" / ("log" + os.environ.get("OPENPILOT_PREFIX", "")))
     return "ipc:///tmp/logmessage" + os.environ.get("OPENPILOT_PREFIX", "")
 
   @staticmethod
   def download_cache_root() -> str:
+    if (root := android_root()) is not None:
+      return str(root / "cache") + "/"
     if os.environ.get('COMMA_CACHE', False):
       return os.environ['COMMA_CACHE'] + "/"
     return DEFAULT_DOWNLOAD_CACHE_ROOT + os.environ.get("OPENPILOT_PREFIX", "") + "/"
@@ -46,6 +61,8 @@ class Paths:
 
   @staticmethod
   def config_root() -> str:
+    if android_root() is not None:
+      return Paths.comma_home()
     if PC:
       return Paths.comma_home()
     else:
@@ -53,6 +70,8 @@ class Paths:
 
   @staticmethod
   def shm_path() -> str:
+    if (root := android_root()) is not None:
+      return str(root / "shm")
     if PC and platform.system() == "Darwin":
       return "/tmp"  # This is not really shared memory on macOS, but it's the closest we can get
     return "/dev/shm"

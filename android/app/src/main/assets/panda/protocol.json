@@ -1,0 +1,167 @@
+{
+  "schema": 1,
+  "hardware_type": 7,
+  "health_size": 48,
+  "health_fields": [
+    {
+      "name": "uptime_pkt",
+      "offset": 0,
+      "bytes": 4
+    },
+    {
+      "name": "voltage_pkt",
+      "offset": 4,
+      "bytes": 2
+    },
+    {
+      "name": "current_pkt",
+      "offset": 6,
+      "bytes": 2
+    },
+    {
+      "name": "safety_tx_blocked_pkt",
+      "offset": 8,
+      "bytes": 4
+    },
+    {
+      "name": "safety_rx_invalid_pkt",
+      "offset": 12,
+      "bytes": 4
+    },
+    {
+      "name": "tx_buffer_overflow_pkt",
+      "offset": 16,
+      "bytes": 4
+    },
+    {
+      "name": "rx_buffer_overflow_pkt",
+      "offset": 20,
+      "bytes": 4
+    },
+    {
+      "name": "faults_pkt",
+      "offset": 24,
+      "bytes": 4
+    },
+    {
+      "name": "flags_pkt",
+      "offset": 28,
+      "bytes": 2
+    },
+    {
+      "name": "car_harness_status_pkt",
+      "offset": 30,
+      "bytes": 1
+    },
+    {
+      "name": "safety_mode_pkt",
+      "offset": 31,
+      "bytes": 1
+    },
+    {
+      "name": "safety_param_pkt",
+      "offset": 32,
+      "bytes": 2
+    },
+    {
+      "name": "fault_status_pkt",
+      "offset": 34,
+      "bytes": 1
+    },
+    {
+      "name": "alternative_experience_pkt",
+      "offset": 35,
+      "bytes": 2
+    },
+    {
+      "name": "interrupt_load_pkt",
+      "offset": 37,
+      "bytes": 1
+    },
+    {
+      "name": "fan_power",
+      "offset": 38,
+      "bytes": 1
+    },
+    {
+      "name": "spi_error_count_pkt",
+      "offset": 39,
+      "bytes": 2
+    },
+    {
+      "name": "sbu1_voltage_mV",
+      "offset": 41,
+      "bytes": 2
+    },
+    {
+      "name": "sbu2_voltage_mV",
+      "offset": 43,
+      "bytes": 2
+    },
+    {
+      "name": "sound_output_level_pkt",
+      "offset": 45,
+      "bytes": 2
+    },
+    {
+      "name": "temperature_pkt",
+      "offset": 47,
+      "bytes": 1
+    }
+  ],
+  "dlc_to_length": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    12,
+    16,
+    20,
+    24,
+    32,
+    48,
+    64
+  ],
+  "health_version": 4290515701,
+  "can_version": 1974202998,
+  "source_sha256": {
+    "panda/board/health.h": "f512bcff6925e233a35c00e2d921fe01933fd77c0705c573a233b170d73ce20d",
+    "opendbc_repo/opendbc/safety/can.h": "76f2ab751f89797c0a2254ab9a010a261678fe30f869d4e777cb7f2048802743",
+    "panda/python/__init__.py": "20815dd095ba76bdb9d095e33ddbba62a7ccabf7bd4e87bdc61dee147e9fb04a"
+  },
+  "golden_vectors": [
+    {
+      "address": 291,
+      "data": "010203",
+      "bus": 0,
+      "fd": false,
+      "wire": "301809000021010203"
+    },
+    {
+      "address": 417001744,
+      "data": "0001020304050607",
+      "bus": 1,
+      "fd": false,
+      "wire": "828488d7c69f0001020304050607"
+    },
+    {
+      "address": 1110,
+      "data": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f",
+      "bus": 2,
+      "fd": true,
+      "wire": "f5b022000067000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f"
+    },
+    {
+      "address": 2047,
+      "data": "",
+      "bus": 0,
+      "fd": false,
+      "wire": "00f83f0000c7"
+    }
+  ]
+}

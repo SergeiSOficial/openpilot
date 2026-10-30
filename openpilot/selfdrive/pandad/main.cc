@@ -16,7 +16,18 @@ int main(int argc, char *argv[]) {
     assert(err == 0);
   }
 
-  std::string serial = (argc > 1) ? argv[1] : "";
-  pandad_main_thread(serial);
+  std::string serial;
+  PandaTransport transport = PandaTransport::AUTO;
+  for (int i = 1; i < argc; ++i) {
+    std::string arg = argv[i];
+    if (arg == "--transport=auto") transport = PandaTransport::AUTO;
+    else if (arg == "--transport=spi") transport = PandaTransport::SPI;
+    else if (arg == "--transport=usb") transport = PandaTransport::USB;
+    else if (arg.rfind("--", 0) == 0 || !serial.empty()) {
+      LOGE("usage: pandad [serial] [--transport=auto|spi|usb]");
+      return 1;
+    } else serial = arg;
+  }
+  pandad_main_thread(serial, transport);
   return 0;
 }

@@ -1,0 +1,71 @@
+{
+  "source_file": "preview20-lenscheck.txt",
+  "source_sha256": "f6769c2646bcb862800f6e26f878ff502a1ec929eea1a115d1465648809e3bed",
+  "observations": [
+    "MODEL=SM-F926B SDK=35 PACKAGE=com.samsung.android.openpilotprobe",
+    "BUILD=samsung/q2qxser/q2q:15/AP3A.240905.015.A2/F926BXXSJJZH3:user/release-keys",
+    "TEST logical=20 layout=vendor format=yuv size=1920x1080 fps=30 seconds=180 shooting=-1 sessiontype=0 vendor=first-entrance=false;samsungcamera=true;factorytest=false;shootingmode=3;recording-fps=30;sw-vdis=false;video-beautyface=false;vtmode=0;operation_mode=none;ssm_shot_mode=0;recording_dr_mode=sdr;sw-super_vdis=false;stream_type=0;",
+    "END=COMPLETE capture_failures=0",
+    "RESULT stream=0 frames=5389 span_s=179.587659567 fps=30.002061461187772 max_gap_ms=66.617865 nonmonotonic=0 distinct_luma_hashes=5389",
+    "RESULT stream=1 frames=1752 span_s=179.621041182 fps=9.748301137091223 max_gap_ms=733.129739 nonmonotonic=0 distinct_luma_hashes=1752",
+    "PAIR nearest_timestamp_median_ms=33.308802 max_ms=366.522708 matched=5389"
+  ],
+  "phases": {
+    "uncovered": {
+      "start_second": 12,
+      "end_second": 19,
+      "streams": {
+        "0": {
+          "samples": 8,
+          "median_luma": 112.2408088235294
+        },
+        "1": {
+          "samples": 8,
+          "median_luma": 97.73529411764706
+        }
+      }
+    },
+    "top_covered": {
+      "start_second": 83,
+      "end_second": 88,
+      "streams": {
+        "0": {
+          "samples": 6,
+          "median_luma": 98.50919117647058
+        },
+        "1": {
+          "samples": 6,
+          "median_luma": 99.84375
+        }
+      }
+    },
+    "middle_covered": {
+      "start_second": 107,
+      "end_second": 113,
+      "streams": {
+        "0": {
+          "samples": 7,
+          "median_luma": 32.43014705882353
+        },
+        "1": {
+          "samples": 7,
+          "median_luma": 99.33823529411765
+        }
+      }
+    },
+    "bottom_covered": {
+      "start_second": 132,
+      "end_second": 138,
+      "streams": {
+        "0": {
+          "samples": 7,
+          "median_luma": 98.94852941176471
+        },
+        "1": {
+          "samples": 7,
+          "median_luma": 22.610294117647058
+        }
+      }
+    }
+  }
+}

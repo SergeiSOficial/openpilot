@@ -98,3 +98,13 @@ build/
 .context/
 PLAN.md
 TASK.md
+
+# Android build and cross-compilation outputs
+android/.gradle/
+android/local.properties
+android/app/src/main/python/generated/
+android/app/src/main/assets/generated/
+android/app/src/main/jniLibs/
+android/app/.cxx/
+tools/android/.cache/
+artifacts/android/

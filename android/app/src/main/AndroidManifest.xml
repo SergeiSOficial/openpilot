@@ -1,0 +1,40 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <uses-permission android:name="android.permission.CAMERA" />
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-feature android:name="android.hardware.camera.any" android:required="false" />
+  <uses-feature android:name="android.hardware.usb.host" android:required="false" />
+  <application android:label="${appLabel}" android:theme="@android:style/Theme.Material.NoActionBar"
+      android:allowBackup="false" android:supportsRtl="true">
+    <uses-native-library android:name="libOpenCL.so" android:required="false" />
+    <uses-native-library android:name="libcdsprpc.so" android:required="false" />
+    <activity android:name=".LiveActivity" android:exported="false" android:screenOrientation="sensorLandscape"
+        android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboardHidden|density" />
+    <service android:name=".LiveCameraService" android:process=":camerad" android:exported="false" />
+    <service android:name=".WorkerService$Live" android:process=":live" android:exported="false" />
+    <service android:name=".WorkerService$Sensors" android:process=":sensord" android:exported="false" />
+    <activity android:name=".MainActivity" android:exported="true" android:resizeableActivity="true"
+        android:screenOrientation="sensorLandscape"
+        android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboardHidden|density">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity android:name=".PandaActivity" android:exported="false" android:screenOrientation="sensorLandscape"
+        android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboardHidden|density" />
+    <service android:name=".WorkerService$Replay" android:process=":replay" android:exported="false" />
+    <service android:name=".WorkerService$Model" android:process=":modeld" android:exported="false" />
+    <service android:name=".WorkerService$Car" android:process=":card" android:exported="false" />
+    <service android:name=".WorkerService$Radar" android:process=":radard" android:exported="false" />
+    <service android:name=".WorkerService$Planner" android:process=":plannerd" android:exported="false" />
+    <service android:name=".WorkerService$Controls" android:process=":controlsd" android:exported="false" />
+    <service android:name=".WorkerService$Selfdrive" android:process=":selfdrived" android:exported="false" />
+    <service android:name=".WorkerService$Calibration" android:process=":calibrationd" android:exported="false" />
+    <service android:name=".WorkerService$Location" android:process=":locationd" android:exported="false" />
+    <service android:name=".WorkerService$Params" android:process=":paramsd" android:exported="false" />
+    <service android:name=".WorkerService$Lag" android:process=":lagd" android:exported="false" />
+    <service android:name=".WorkerService$Torque" android:process=":torqued" android:exported="false" />
+    <service android:name=".WorkerService$Monitoring" android:process=":dmonitoringd" android:exported="false" />
+  </application>
+</manifest>

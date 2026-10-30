@@ -1,4 +1,5 @@
 import sys
+import os
 import json
 import ctypes
 import weakref
@@ -31,7 +32,8 @@ class ParamKeyType(IntEnum):
 
 
 _suffix = ".dylib" if sys.platform == "darwin" else ".so"
-lib = ctypes.CDLL(Path(__file__).with_name(f"libparams_c{_suffix}"))
+_library_root = os.environ.get("OPENPILOT_ANDROID_NATIVE_DIR")
+lib = ctypes.CDLL(str((Path(_library_root) if _library_root else Path(__file__).parent) / f"libparams_c{_suffix}"))
 
 ParamsHandle = ctypes.c_void_p
 

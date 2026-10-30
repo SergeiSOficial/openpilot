@@ -31,10 +31,10 @@ bool check_connected(Panda *panda) {
   return true;
 }
 
-Panda *connect(std::string serial) {
+Panda *connect(std::string serial, PandaTransport transport) {
   std::unique_ptr<Panda> panda;
   try {
-    panda = std::make_unique<Panda>(serial);
+    panda = std::make_unique<Panda>(serial, transport);
   } catch (std::exception &e) {
     return nullptr;
   }
@@ -423,12 +423,16 @@ void pandad_run(Panda *panda) {
   send_thread.join();
 }
 
-void pandad_main_thread(std::string serial) {
+void pandad_main_thread(std::string serial, PandaTransport transport) {
   if (serial.empty()) {
-    auto serials = Panda::list();
+    auto serials = Panda::list(transport);
 
     if (serials.empty()) {
       LOGW("no pandas found, exiting");
+      return;
+    }
+    if (serials.size() != 1) {
+      LOGE("multiple USB Red Pandas found; specify a serial");
       return;
     }
     serial = serials[0];
@@ -438,7 +442,7 @@ void pandad_main_thread(std::string serial) {
 
   Panda *panda = nullptr;
   while (!do_exit) {
-    panda = connect(serial);
+    panda = connect(serial, transport);
     if (panda) break;
     util::sleep_for(100);
   }

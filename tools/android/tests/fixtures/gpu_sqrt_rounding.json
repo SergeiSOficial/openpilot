@@ -1,0 +1,55 @@
+{
+  "source": "physical packaged CPU, original recorded fixture36 variance kernel133",
+  "model_sha256": "65a08adc31d5c456219687d99b7bf5e44d61dae2d49ea67850e76105c7248cce",
+  "samples": [
+    {
+      "input": 27.33013343811035,
+      "accumulator": 13993.0234375,
+      "expected": 5.227822780609131
+    },
+    {
+      "input": 31.736469268798828,
+      "accumulator": 16249.0673828125,
+      "expected": 5.6335129737854
+    },
+    {
+      "input": 31.900386810302734,
+      "accumulator": 16332.9931640625,
+      "expected": 5.648042678833008
+    },
+    {
+      "input": 32.34641647338867,
+      "accumulator": 16561.359375,
+      "expected": 5.6873908042907715
+    },
+    {
+      "input": 32.67230987548828,
+      "accumulator": 16728.216796875,
+      "expected": 5.715969562530518
+    },
+    {
+      "input": 31.79851722717285,
+      "accumulator": 16280.8359375,
+      "expected": 5.639017581939697
+    },
+    {
+      "input": 32.567481994628906,
+      "accumulator": 16674.544921875,
+      "expected": 5.706792831420898
+    },
+    {
+      "input": 33.2104377746582,
+      "accumulator": 17003.73828125,
+      "expected": 5.762849807739258
+    },
+    {
+      "input": 32.9161376953125,
+      "accumulator": 16853.056640625,
+      "expected": 5.7372589111328125
+    }
+  ],
+  "original_gpu_failure": {
+    "index": 3,
+    "value": 5.68739128112793
+  }
+}

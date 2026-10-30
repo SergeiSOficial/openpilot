@@ -1,0 +1,1036 @@
+{
+  "schema": 1,
+  "scope": "Six complete measured signatures; scalar regressions only, no host model execution",
+  "nodes": [
+    {
+      "node": "node_Conv_819",
+      "contract": {
+        "inputs": [
+          "InsertedPrecisionFreeCast_gelu_5",
+          "InsertedPrecisionFreeCast_model._vision._backbone.blocks.2.0.dw_mid.conv.weight",
+          "InsertedPrecisionFreeCast_model._vision._backbone.blocks.2.0.dw_mid.conv.weight_bias"
+        ],
+        "output": "InsertedPrecisionFreeCast_getitem_21",
+        "shapes": [
+          [
+            1,
+            192,
+            30,
+            45
+          ],
+          [
+            192,
+            1,
+            5,
+            5
+          ],
+          [
+            192
+          ],
+          [
+            1,
+            192,
+            15,
+            23
+          ]
+        ],
+        "attributes": {
+          "strides": [
+            2,
+            2
+          ],
+          "group": 192,
+          "pads": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "dilations": [
+            1,
+            1
+          ],
+          "auto_pad": "NOTSET"
+        }
+      },
+      "cases": [
+        {
+          "coordinates": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "bias_bits": "40040000",
+          "expected_bits": "3e348888",
+          "terms": [
+            [
+              "00000000",
+              "3db24000"
+            ],
+            [
+              "00000000",
+              "3d6d0000"
+            ],
+            [
+              "00000000",
+              "bd48e000"
+            ],
+            [
+              "00000000",
+              "be8ec000"
+            ],
+            [
+              "00000000",
+              "3ddea000"
+            ],
+            [
+              "00000000",
+              "3df76000"
+            ],
+            [
+              "00000000",
+              "3e33c000"
+            ],
+            [
+              "00000000",
+              "be0ac000"
+            ],
+            [
+              "00000000",
+              "bf10e000"
+            ],
+            [
+              "00000000",
+              "3e0f4000"
+            ],
+            [
+              "00000000",
+              "3d694000"
+            ],
+            [
+              "00000000",
+              "3d22a000"
+            ],
+            [
+              "3f74e500",
+              "3e3aa000"
+            ],
+            [
+              "3f890b48",
+              "bf922000"
+            ],
+            [
+              "3f8a29be",
+              "3ee2c000"
+            ],
+            [
+              "00000000",
+              "bd376000"
+            ],
+            [
+              "00000000",
+              "bcce0000"
+            ],
+            [
+              "3f64add9",
+              "3e5fe000"
+            ],
+            [
+              "3fa76fb7",
+              "bf7e6000"
+            ],
+            [
+              "3fa1a69f",
+              "3e720000"
+            ],
+            [
+              "00000000",
+              "3ca7e000"
+            ],
+            [
+              "00000000",
+              "bbaca000"
+            ],
+            [
+              "3f5f7e43",
+              "bc16e000"
+            ],
+            [
+              "3fa8fd1e",
+              "bed34000"
+            ],
+            [
+              "3fa70355",
+              "3d056000"
+            ]
+          ],
+          "measured_variant_bits": {
+            "legacy_tinygrad": "3e348890",
+            "sequential_fma_bias_last": "3e348888",
+            "sequential_fma_bias_first": "3e34888a",
+            "separate_bias_last": "3e348890"
+          }
+        }
+      ],
+      "source_evidence": "artifacts/android/gpu-repair/cabin-depthwise-physical-20261030T151447Z/depthwise819",
+      "source_array_sha256": "c81cb6f7aaca69233582e84e9c961b0a115aa9a588f9fd8da86cdee5e9bfc36c",
+      "source_report_sha256": "0b12cc1648fcf5985a38a88c0c7cbfcb8d165fac882a4cbef6bb39ec02b5656f",
+      "installed_main_apk_sha256": "7eb25b7e5c132bb3be3d917398aa2fff2b72cfc18868756f1701ddb575703cce",
+      "original_model_sha256": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+      "cpu_lowering_sha256": "46143482893d608825ce400eb0b05afc9688d9cf8d2b2ef608ef936e8db2b22f",
+      "diagnostic_sha256": "2f1f11fde210043baa65be3cb5292ec835df13413cb7aa3edea799d7873d864c",
+      "input_sha256": {
+        "InsertedPrecisionFreeCast_gelu_5": "f7229f2ab40d555aa9f801030fcc93dd0671169f4a55e66112ea0cdad2894fd0",
+        "InsertedPrecisionFreeCast_model._vision._backbone.blocks.2.0.dw_mid.conv.weight": "4cbcb6ee2e2fc7e530382d7f78485b23ed724b9ec2e61f538e9caafaf729bc29",
+        "InsertedPrecisionFreeCast_model._vision._backbone.blocks.2.0.dw_mid.conv.weight_bias": "b4e9895996e3a49f660cf04a369ca4112b17a7ebbb75e4ac54cbc7b2059d8816"
+      }
+    },
+    {
+      "node": "node_Conv_825",
+      "contract": {
+        "inputs": [
+          "InsertedPrecisionFreeCast_gelu_7",
+          "InsertedPrecisionFreeCast_model._vision._backbone.blocks.2.1.dw_mid.conv.weight",
+          "InsertedPrecisionFreeCast_model._vision._backbone.blocks.2.1.dw_mid.conv.weight_bias"
+        ],
+        "output": "InsertedPrecisionFreeCast_getitem_30",
+        "shapes": [
+          [
+            1,
+            192,
+            15,
+            23
+          ],
+          [
+            192,
+            1,
+            3,
+            3
+          ],
+          [
+            192
+          ],
+          [
+            1,
+            192,
+            15,
+            23
+          ]
+        ],
+        "attributes": {
+          "strides": [
+            1,
+            1
+          ],
+          "group": 192,
+          "pads": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "dilations": [
+            1,
+            1
+          ],
+          "auto_pad": "NOTSET"
+        }
+      },
+      "cases": [
+        {
+          "coordinates": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "bias_bits": "bed6a000",
+          "expected_bits": "bf404c82",
+          "terms": [
+            [
+              "00000000",
+              "3ead8000"
+            ],
+            [
+              "00000000",
+              "3fae0000"
+            ],
+            [
+              "00000000",
+              "bbdee000"
+            ],
+            [
+              "3fa4c14d",
+              "bd7e4000"
+            ],
+            [
+              "3eb1dfa0",
+              "be804000"
+            ],
+            [
+              "3eb78b63",
+              "3cc02000"
+            ],
+            [
+              "3f9054a3",
+              "bdf42000"
+            ],
+            [
+              "3d38c9ba",
+              "bf4da000"
+            ],
+            [
+              "3d12efe6",
+              "bda10000"
+            ]
+          ],
+          "measured_variant_bits": {
+            "legacy_tinygrad": "bf404c83",
+            "sequential_fma_bias_last": "bf404c82",
+            "sequential_fma_bias_first": "bf404c83",
+            "separate_bias_last": "bf404c83"
+          }
+        }
+      ],
+      "source_evidence": "artifacts/android/gpu-repair/cabin-depthwise-physical-20261030T151447Z/remaining-depthwise",
+      "source_array_sha256": "0a0273d3ce79f1e43f36d3542035f33001d6c7f46acc0ba10d338efba8d081fe",
+      "source_report_sha256": "411bddc16658a08402d11219a271946626bc4bf609362f0ec7565ffc56e9d2a0",
+      "installed_main_apk_sha256": "7eb25b7e5c132bb3be3d917398aa2fff2b72cfc18868756f1701ddb575703cce",
+      "original_model_sha256": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+      "cpu_lowering_sha256": "46143482893d608825ce400eb0b05afc9688d9cf8d2b2ef608ef936e8db2b22f",
+      "diagnostic_sha256": "2f1f11fde210043baa65be3cb5292ec835df13413cb7aa3edea799d7873d864c",
+      "input_sha256": {
+        "InsertedPrecisionFreeCast_gelu_7": "9f6979e9811dea2633f97577fec340d33df36f14beedfef438cafad0f376e064",
+        "InsertedPrecisionFreeCast_model._vision._backbone.blocks.2.1.dw_mid.conv.weight": "1d863ba003ef8a320c58f67a9de8356a86299ab0c8c5e7d849a715a9b9c48b4a",
+        "InsertedPrecisionFreeCast_model._vision._backbone.blocks.2.1.dw_mid.conv.weight_bias": "179ff3da4bd82f60ffd9106253997c27043187b7d8471429081b604a7c103ff3"
+      }
+    },
+    {
+      "node": "node_Conv_857",
+      "contract": {
+        "inputs": [
+          "InsertedPrecisionFreeCast_gelu_16",
+          "InsertedPrecisionFreeCast_model._vision._backbone.blocks.3.0.dw_mid.conv.weight",
+          "InsertedPrecisionFreeCast_model._vision._backbone.blocks.3.0.dw_mid.conv.weight_bias"
+        ],
+        "output": "InsertedPrecisionFreeCast_getitem_78",
+        "shapes": [
+          [
+            1,
+            576,
+            15,
+            23
+          ],
+          [
+            576,
+            1,
+            3,
+            3
+          ],
+          [
+            576
+          ],
+          [
+            1,
+            576,
+            8,
+            12
+          ]
+        ],
+        "attributes": {
+          "strides": [
+            2,
+            2
+          ],
+          "group": 576,
+          "pads": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "dilations": [
+            1,
+            1
+          ],
+          "auto_pad": "NOTSET"
+        }
+      },
+      "cases": [
+        {
+          "coordinates": [
+            0,
+            1,
+            1,
+            8
+          ],
+          "bias_bits": "3f7cc000",
+          "expected_bits": "3eaf1742",
+          "terms": [
+            [
+              "be04df26",
+              "3e986000"
+            ],
+            [
+              "be059d57",
+              "3f808000"
+            ],
+            [
+              "be047fcc",
+              "3eb64000"
+            ],
+            [
+              "be25263e",
+              "3f0d6000"
+            ],
+            [
+              "be25396a",
+              "3f76e000"
+            ],
+            [
+              "be249452",
+              "3ee38000"
+            ],
+            [
+              "be2da6cd",
+              "3e4ba000"
+            ],
+            [
+              "be2da1cf",
+              "3e8c0000"
+            ],
+            [
+              "be2d3aac",
+              "3e4ac000"
+            ]
+          ],
+          "measured_variant_bits": {
+            "legacy_tinygrad": "3eaf1740",
+            "sequential_fma_bias_last": "3eaf1742",
+            "sequential_fma_bias_first": "3eaf1740",
+            "separate_bias_last": "3eaf1740"
+          }
+        }
+      ],
+      "source_evidence": "artifacts/android/gpu-repair/cabin-depthwise-physical-20261030T151447Z/remaining-depthwise",
+      "source_array_sha256": "61604bc9d8f06cc24fda7b9ad0a6e9069c1b1f45a400c98a79e2a8a1fbc98808",
+      "source_report_sha256": "411bddc16658a08402d11219a271946626bc4bf609362f0ec7565ffc56e9d2a0",
+      "installed_main_apk_sha256": "7eb25b7e5c132bb3be3d917398aa2fff2b72cfc18868756f1701ddb575703cce",
+      "original_model_sha256": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+      "cpu_lowering_sha256": "46143482893d608825ce400eb0b05afc9688d9cf8d2b2ef608ef936e8db2b22f",
+      "diagnostic_sha256": "2f1f11fde210043baa65be3cb5292ec835df13413cb7aa3edea799d7873d864c",
+      "input_sha256": {
+        "InsertedPrecisionFreeCast_gelu_16": "bb860d0459d8c614caff387443a4b89a166cc08ff4fbdeac45f6edd68d17445f",
+        "InsertedPrecisionFreeCast_model._vision._backbone.blocks.3.0.dw_mid.conv.weight": "22fc2fae8f11b6685bc15206b1d190a6ebaa8fc55111b2d91f7e8fdd1879890f",
+        "InsertedPrecisionFreeCast_model._vision._backbone.blocks.3.0.dw_mid.conv.weight_bias": "c4c30affa881b498d9343ba692342c4afca9f56c49d11337ad2d42e7647cbcff"
+      }
+    },
+    {
+      "node": "node_Conv_865",
+      "contract": {
+        "inputs": [
+          "InsertedPrecisionFreeCast_gelu_18",
+          "InsertedPrecisionFreeCast_model._vision._backbone.blocks.3.1.dw_mid.conv.weight",
+          "InsertedPrecisionFreeCast_model._vision._backbone.blocks.3.1.dw_mid.conv.weight_bias"
+        ],
+        "output": "InsertedPrecisionFreeCast_getitem_90",
+        "shapes": [
+          [
+            1,
+            512,
+            8,
+            12
+          ],
+          [
+            512,
+            1,
+            5,
+            5
+          ],
+          [
+            512
+          ],
+          [
+            1,
+            512,
+            8,
+            12
+          ]
+        ],
+        "attributes": {
+          "strides": [
+            1,
+            1
+          ],
+          "group": 512,
+          "pads": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "dilations": [
+            1,
+            1
+          ],
+          "auto_pad": "NOTSET"
+        }
+      },
+      "cases": [
+        {
+          "coordinates": [
+            0,
+            0,
+            0,
+            2
+          ],
+          "bias_bits": "3ebc4000",
+          "expected_bits": "be4d3f54",
+          "terms": [
+            [
+              "00000000",
+              "3d09a000"
+            ],
+            [
+              "00000000",
+              "be0ca000"
+            ],
+            [
+              "00000000",
+              "be238000"
+            ],
+            [
+              "00000000",
+              "bdd0a000"
+            ],
+            [
+              "00000000",
+              "3c3b2000"
+            ],
+            [
+              "00000000",
+              "bdca8000"
+            ],
+            [
+              "00000000",
+              "be8ae000"
+            ],
+            [
+              "00000000",
+              "bd416000"
+            ],
+            [
+              "00000000",
+              "3cb44000"
+            ],
+            [
+              "00000000",
+              "3e1a2000"
+            ],
+            [
+              "4001b1e9",
+              "be50e000"
+            ],
+            [
+              "3f5baf38",
+              "beaae000"
+            ],
+            [
+              "3f119ae0",
+              "3dad8000"
+            ],
+            [
+              "3f0e22f1",
+              "3ea3c000"
+            ],
+            [
+              "3f0bac15",
+              "3ef60000"
+            ],
+            [
+              "3fc405ef",
+              "bd9fa000"
+            ],
+            [
+              "3ea145ef",
+              "be76a000"
+            ],
+            [
+              "3d8144e0",
+              "bdce2000"
+            ],
+            [
+              "3c9a83a4",
+              "ba1da000"
+            ],
+            [
+              "3c18b4bb",
+              "3cb3e000"
+            ],
+            [
+              "3fcd42ec",
+              "bcec6000"
+            ],
+            [
+              "3ed3b8c4",
+              "be66a000"
+            ],
+            [
+              "3e16941c",
+              "bdad2000"
+            ],
+            [
+              "3d23ee4a",
+              "bd17c000"
+            ],
+            [
+              "3cb46e06",
+              "bd904000"
+            ]
+          ],
+          "measured_variant_bits": {
+            "legacy_tinygrad": "be4d3f5c",
+            "sequential_fma_bias_last": "be4d3f54",
+            "sequential_fma_bias_first": "be4d3f55",
+            "separate_bias_last": "be4d3f5c"
+          }
+        }
+      ],
+      "source_evidence": "artifacts/android/gpu-repair/cabin-depthwise-physical-20261030T151447Z/remaining-depthwise",
+      "source_array_sha256": "297cd0b0cb61dadae05fd65072d720a71b71ebe660381d0412fd2aa7c03fb957",
+      "source_report_sha256": "411bddc16658a08402d11219a271946626bc4bf609362f0ec7565ffc56e9d2a0",
+      "installed_main_apk_sha256": "7eb25b7e5c132bb3be3d917398aa2fff2b72cfc18868756f1701ddb575703cce",
+      "original_model_sha256": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+      "cpu_lowering_sha256": "46143482893d608825ce400eb0b05afc9688d9cf8d2b2ef608ef936e8db2b22f",
+      "diagnostic_sha256": "2f1f11fde210043baa65be3cb5292ec835df13413cb7aa3edea799d7873d864c",
+      "input_sha256": {
+        "InsertedPrecisionFreeCast_gelu_18": "e2c9a77ab24d7d29ede8992e092232178614190ef4a38655ce5de7bf50d3a6c0",
+        "InsertedPrecisionFreeCast_model._vision._backbone.blocks.3.1.dw_mid.conv.weight": "a93c8800a672110d518111e076a99397dc2d78081b022a084c59a5a62828edd1",
+        "InsertedPrecisionFreeCast_model._vision._backbone.blocks.3.1.dw_mid.conv.weight_bias": "ebfce6a798dee34026fbbd37e9a29368b07533245a24c9a1164c63c1ad86c8bc"
+      }
+    },
+    {
+      "node": "node_Conv_877",
+      "contract": {
+        "inputs": [
+          "InsertedPrecisionFreeCast_gelu_22",
+          "InsertedPrecisionFreeCast_model._vision._backbone.blocks.3.3.dw_mid.conv.weight",
+          "InsertedPrecisionFreeCast_model._vision._backbone.blocks.3.3.dw_mid.conv.weight_bias"
+        ],
+        "output": "InsertedPrecisionFreeCast_getitem_108",
+        "shapes": [
+          [
+            1,
+            384,
+            8,
+            12
+          ],
+          [
+            384,
+            1,
+            5,
+            5
+          ],
+          [
+            384
+          ],
+          [
+            1,
+            384,
+            8,
+            12
+          ]
+        ],
+        "attributes": {
+          "strides": [
+            1,
+            1
+          ],
+          "group": 384,
+          "pads": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "dilations": [
+            1,
+            1
+          ],
+          "auto_pad": "NOTSET"
+        }
+      },
+      "cases": [
+        {
+          "coordinates": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "bias_bits": "3e538000",
+          "expected_bits": "be5119e6",
+          "terms": [
+            [
+              "00000000",
+              "3fba6000"
+            ],
+            [
+              "00000000",
+              "be038000"
+            ],
+            [
+              "00000000",
+              "bfe34000"
+            ],
+            [
+              "00000000",
+              "3f04e000"
+            ],
+            [
+              "00000000",
+              "3fd70000"
+            ],
+            [
+              "00000000",
+              "bef8e000"
+            ],
+            [
+              "00000000",
+              "bee28000"
+            ],
+            [
+              "00000000",
+              "40248000"
+            ],
+            [
+              "00000000",
+              "bf5b4000"
+            ],
+            [
+              "00000000",
+              "be8c2000"
+            ],
+            [
+              "00000000",
+              "be800000"
+            ],
+            [
+              "bb73de8a",
+              "3f072000"
+            ],
+            [
+              "bd98f54e",
+              "402c4000"
+            ],
+            [
+              "be160f98",
+              "3f85e000"
+            ],
+            [
+              "be242565",
+              "bf3e0000"
+            ],
+            [
+              "00000000",
+              "3ed1a000"
+            ],
+            [
+              "bc8911c2",
+              "3e1d6000"
+            ],
+            [
+              "bdbd5072",
+              "bf112000"
+            ],
+            [
+              "be285b08",
+              "3f8a8000"
+            ],
+            [
+              "3bf5de17",
+              "3f06c000"
+            ],
+            [
+              "00000000",
+              "bf04c000"
+            ],
+            [
+              "bd878f9a",
+              "be76c000"
+            ],
+            [
+              "be082146",
+              "3f6da000"
+            ],
+            [
+              "be0513a7",
+              "be41e000"
+            ],
+            [
+              "3d86ee36",
+              "3f022000"
+            ]
+          ],
+          "measured_variant_bits": {
+            "legacy_tinygrad": "be5119e4",
+            "sequential_fma_bias_last": "be5119e6",
+            "sequential_fma_bias_first": "be5119e6",
+            "separate_bias_last": "be5119e4"
+          }
+        },
+        {
+          "coordinates": [
+            0,
+            0,
+            0,
+            2
+          ],
+          "bias_bits": "3e538000",
+          "expected_bits": "bed14422",
+          "terms": [
+            [
+              "00000000",
+              "3fba6000"
+            ],
+            [
+              "00000000",
+              "be038000"
+            ],
+            [
+              "00000000",
+              "bfe34000"
+            ],
+            [
+              "00000000",
+              "3f04e000"
+            ],
+            [
+              "00000000",
+              "3fd70000"
+            ],
+            [
+              "00000000",
+              "bef8e000"
+            ],
+            [
+              "00000000",
+              "bee28000"
+            ],
+            [
+              "00000000",
+              "40248000"
+            ],
+            [
+              "00000000",
+              "bf5b4000"
+            ],
+            [
+              "00000000",
+              "be8c2000"
+            ],
+            [
+              "bb73de8a",
+              "be800000"
+            ],
+            [
+              "bd98f54e",
+              "3f072000"
+            ],
+            [
+              "be160f98",
+              "402c4000"
+            ],
+            [
+              "be242565",
+              "3f85e000"
+            ],
+            [
+              "be19aa30",
+              "bf3e0000"
+            ],
+            [
+              "bc8911c2",
+              "3ed1a000"
+            ],
+            [
+              "bdbd5072",
+              "3e1d6000"
+            ],
+            [
+              "be285b08",
+              "bf112000"
+            ],
+            [
+              "3bf5de17",
+              "3f8a8000"
+            ],
+            [
+              "bde92ec0",
+              "3f06c000"
+            ],
+            [
+              "bd878f9a",
+              "bf04c000"
+            ],
+            [
+              "be082146",
+              "be76c000"
+            ],
+            [
+              "be0513a7",
+              "3f6da000"
+            ],
+            [
+              "3d86ee36",
+              "be41e000"
+            ],
+            [
+              "be2080b0",
+              "3f022000"
+            ]
+          ],
+          "measured_variant_bits": {
+            "legacy_tinygrad": "bed14422",
+            "sequential_fma_bias_last": "bed14422",
+            "sequential_fma_bias_first": "bed14420",
+            "separate_bias_last": "bed14422"
+          }
+        }
+      ],
+      "source_evidence": "artifacts/android/gpu-repair/cabin-depthwise-physical-20261030T151447Z/remaining-depthwise",
+      "source_array_sha256": "5d3d59241d97fd2099e446783f3a2da33ce788dcbab3b368d0d61f1ab4dc3eee",
+      "source_report_sha256": "411bddc16658a08402d11219a271946626bc4bf609362f0ec7565ffc56e9d2a0",
+      "installed_main_apk_sha256": "7eb25b7e5c132bb3be3d917398aa2fff2b72cfc18868756f1701ddb575703cce",
+      "original_model_sha256": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+      "cpu_lowering_sha256": "46143482893d608825ce400eb0b05afc9688d9cf8d2b2ef608ef936e8db2b22f",
+      "diagnostic_sha256": "2f1f11fde210043baa65be3cb5292ec835df13413cb7aa3edea799d7873d864c",
+      "input_sha256": {
+        "InsertedPrecisionFreeCast_gelu_22": "6c4d1b12998388368bac7362580a629d858282a495bcc8de87bcf3d26d08a24f",
+        "InsertedPrecisionFreeCast_model._vision._backbone.blocks.3.3.dw_mid.conv.weight": "272e0ec77448b7667eb0fcab7d165e6f26358780c497b34187273b3234e32a1d",
+        "InsertedPrecisionFreeCast_model._vision._backbone.blocks.3.3.dw_mid.conv.weight_bias": "fe1b7d362e442009c13da8fffa817d0ca87485e4acebb3f57b54b2b68e8377f1"
+      }
+    },
+    {
+      "node": "node_Conv_883",
+      "contract": {
+        "inputs": [
+          "InsertedPrecisionFreeCast_gelu_24",
+          "InsertedPrecisionFreeCast_model._vision._backbone.blocks.3.4.dw_mid.conv.weight",
+          "InsertedPrecisionFreeCast_model._vision._backbone.blocks.3.4.dw_mid.conv.weight_bias"
+        ],
+        "output": "InsertedPrecisionFreeCast_getitem_117",
+        "shapes": [
+          [
+            1,
+            512,
+            8,
+            12
+          ],
+          [
+            512,
+            1,
+            3,
+            3
+          ],
+          [
+            512
+          ],
+          [
+            1,
+            512,
+            8,
+            12
+          ]
+        ],
+        "attributes": {
+          "strides": [
+            1,
+            1
+          ],
+          "group": 512,
+          "pads": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "dilations": [
+            1,
+            1
+          ],
+          "auto_pad": "NOTSET"
+        }
+      },
+      "cases": [
+        {
+          "coordinates": [
+            0,
+            0,
+            6,
+            6
+          ],
+          "bias_bits": "41a6c000",
+          "expected_bits": "41a73cc9",
+          "terms": [
+            [
+              "bbea0b1b",
+              "bb4ea000"
+            ],
+            [
+              "be2c1205",
+              "3eb2c000"
+            ],
+            [
+              "be2cd32b",
+              "3df54000"
+            ],
+            [
+              "be00f846",
+              "3d7de000"
+            ],
+            [
+              "be2e0bd5",
+              "c0040000"
+            ],
+            [
+              "be2c6ba0",
+              "bdb92000"
+            ],
+            [
+              "be12b3e5",
+              "3f0a6000"
+            ],
+            [
+              "be2524d1",
+              "3f112000"
+            ],
+            [
+              "be22a317",
+              "3e9f0000"
+            ]
+          ],
+          "measured_variant_bits": {
+            "legacy_tinygrad": "41a73cca",
+            "sequential_fma_bias_last": "41a73cc9",
+            "sequential_fma_bias_first": "41a73cca",
+            "separate_bias_last": "41a73cca"
+          }
+        }
+      ],
+      "source_evidence": "artifacts/android/gpu-repair/cabin-depthwise-physical-20261030T151447Z/remaining-depthwise",
+      "source_array_sha256": "afc449357a38e3a0da80a91dae80fd0913d5f6043491985bb94bfac5dd2dd0d6",
+      "source_report_sha256": "411bddc16658a08402d11219a271946626bc4bf609362f0ec7565ffc56e9d2a0",
+      "installed_main_apk_sha256": "7eb25b7e5c132bb3be3d917398aa2fff2b72cfc18868756f1701ddb575703cce",
+      "original_model_sha256": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+      "cpu_lowering_sha256": "46143482893d608825ce400eb0b05afc9688d9cf8d2b2ef608ef936e8db2b22f",
+      "diagnostic_sha256": "2f1f11fde210043baa65be3cb5292ec835df13413cb7aa3edea799d7873d864c",
+      "input_sha256": {
+        "InsertedPrecisionFreeCast_gelu_24": "4e0ab0c26d2678d3e5e5f60d936820ca62e5f7c5fc5be30ae1f35fd1bab39c12",
+        "InsertedPrecisionFreeCast_model._vision._backbone.blocks.3.4.dw_mid.conv.weight": "f1bd15b73fd810d553273ae43f588e23fd4fb8debf7b2b0121a5e87c6561cdec",
+        "InsertedPrecisionFreeCast_model._vision._backbone.blocks.3.4.dw_mid.conv.weight_bias": "f1eb3706052e135275f6435bda1fb96895f0f1fff922d94c17d5f8211fd9796e"
+      }
+    }
+  ]
+}

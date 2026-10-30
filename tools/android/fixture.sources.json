@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "route": "98395b7c5b27882e|0000002b--2686b5a2d0",
+  "segment": 1,
+  "files": {
+    "rlog.zst": {
+      "url": "https://commadataci.blob.core.windows.net/openpilotci/98395b7c5b27882e/0000002b--2686b5a2d0/1/rlog.zst",
+      "bytes": 11220963,
+      "sha256": "bb74414f3ef0d9c1f92713c52baa775ca96602312ff8ff8413491ccb5f238a14"
+    },
+    "fcamera.hevc": {
+      "url": "https://commadataci.blob.core.windows.net/openpilotci/98395b7c5b27882e/0000002b--2686b5a2d0/1/fcamera.hevc",
+      "bytes": 37668943,
+      "sha256": "55bbabc1f481fb86170c4203d629264dca44b0c09cdbe93a577cb5446e00261e"
+    },
+    "ecamera.hevc": {
+      "url": "https://commadataci.blob.core.windows.net/openpilotci/98395b7c5b27882e/0000002b--2686b5a2d0/1/ecamera.hevc",
+      "bytes": 37660514,
+      "sha256": "d42b9ccc13b35ccbcb77787bf311a7a8ee1e60255412df4e6c8dacde65e04e8a"
+    }
+  }
+}

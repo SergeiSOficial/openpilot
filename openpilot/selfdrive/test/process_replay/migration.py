@@ -1,6 +1,7 @@
+from __future__ import annotations
 from collections import defaultdict
 from collections.abc import Callable
-from typing import cast
+from typing import cast, TYPE_CHECKING
 import capnp
 import functools
 import traceback
@@ -19,7 +20,8 @@ from openpilot.selfdrive.modeld.fill_model_msg import fill_xyz_poly, fill_lane_l
 from openpilot.selfdrive.test.process_replay.vision_meta import meta_from_encode_index
 from openpilot.selfdrive.controls.lib.drive_helpers import CONTROL_N, get_accel_from_plan, should_stop
 from openpilot.system.manager.process_config import managed_processes
-from openpilot.tools.lib.logreader import LogIterable, LogReader, save_log
+if TYPE_CHECKING:
+  from openpilot.tools.lib.logreader import LogIterable
 
 MessageWithIndex = tuple[int, capnp.lib.capnp._DynamicStructReader]
 MigrationOps = tuple[list[tuple[int, capnp.lib.capnp._DynamicStructReader]], list[capnp.lib.capnp._DynamicStructReader], list[int]]
@@ -539,6 +541,7 @@ def migrate_driverMonitoringState(msgs):
 
 
 if __name__ == '__main__':
+  from openpilot.tools.lib.logreader import LogReader, save_log
   parser = argparse.ArgumentParser(description="Migrate logs")
   parser.add_argument("input_path", help="Segment identifier or path to file")
   parser.add_argument("output_path", help="Path to output file")

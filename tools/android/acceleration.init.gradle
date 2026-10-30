@@ -1,0 +1,47 @@
+// Separate application and build directory: never replaces the simulation or
+// Samsung live-camera application while comparing inference backends.
+gradle.beforeProject { project ->
+    project.pluginManager.withPlugin('com.android.application') {
+        project.androidComponents.finalizeDsl { android ->
+            android.defaultConfig.applicationId = 'ai.comma.openpilot.acceleration'
+            android.defaultConfig.testApplicationId = 'ai.comma.openpilot.acceleration.test'
+            android.defaultConfig.manifestPlaceholders.appLabel = project.hasProperty('qualifiedCpu') ? 'openpilot Simulation (optimized CPU)' : 'openpilot Acceleration'
+            android.defaultConfig.versionName = '0.3.0-acceleration-diagnostic'
+            if(project.hasProperty('qnnQuantized')) {
+                android.defaultConfig.applicationId = 'ai.comma.openpilot.qnn'
+                android.defaultConfig.testApplicationId = 'ai.comma.openpilot.qnn.test'
+                android.defaultConfig.versionName = '0.4.0-qnn-experiment'
+                android.defaultConfig.manifestPlaceholders.appLabel = 'openpilot Quantized Simulation (experimental)'
+            }
+            if (project.hasProperty('modernQnn')) {
+                android.defaultConfig.ndk.abiFilters.clear()
+                android.defaultConfig.ndk.abiFilters.add('arm64-v8a')
+                if(project.hasProperty('qnnCpuEmulator')) {
+                    android.defaultConfig.ndk.abiFilters.clear()
+                    android.defaultConfig.ndk.abiFilters.add('x86_64')
+                }
+                android.splits.abi.enable = false
+                android.defaultConfig.manifestPlaceholders.appLabel = 'openpilot Hardware Bench (QNN)'
+                if(project.hasProperty('qnnQuantized'))android.defaultConfig.manifestPlaceholders.appLabel = 'openpilot Quantized Simulation (experimental)'
+                android.sourceSets.main.assets.srcDir(project.file('../../tools/android/.cache/qnn-assets'))
+                android.sourceSets.androidTest.java.srcDir(project.file('src/qnnTest/java'))
+                android.packaging.jniLibs.keepDebugSymbols.add('**/libQnn*.so')
+            }
+            android.sourceSets.main.assets.srcDir(project.file('../../tools/android/.cache/acceleration-assets'))
+            android.sourceSets.main.jniLibs.srcDir(project.file('../../tools/android/.cache/tuned/jniLibs'))
+            android.sourceSets.main.jniLibs.srcDir(project.file('../../tools/android/.cache/parallel/jniLibs'))
+            android.sourceSets.androidTest.java.srcDir(project.file('src/accelerationTest/java'))
+            android.sourceSets.androidTest.assets.srcDir(project.file('src/accelerationTest/assets'))
+            // Qualification pins the exact ELF bytes; do not silently strip a
+            // different file between staging and the on-target hash check.
+            android.packaging.jniLibs.keepDebugSymbols.add('**/libopenpilot_kernels*.so')
+        }
+        if (project.hasProperty('modernQnn')) {
+            ['onnxruntime-android-1.29.0.aar','onnxruntime-android-qnn-2.7.0.aar','qnn-runtime-2.51.0.aar'].each { name ->
+                project.dependencies.add('implementation',project.files('../../tools/android/.cache/qnn-deps/'+name))
+            }
+        } else {
+            project.dependencies.add('implementation', project.files('../../tools/android/.cache/live-deps/onnxruntime-android-1.23.2.aar'))
+        }
+    }
+}

@@ -1,0 +1,13 @@
+package:
+  name: pycapnp
+  version: "2.1.0"
+source: pypi
+build:
+  number: 1
+  script_env:
+    - CAPNP_FORCE_CAPNP_INSTALL=1
+requirements:
+  build:
+    - Cython 3.3.0
+  host:
+    - python

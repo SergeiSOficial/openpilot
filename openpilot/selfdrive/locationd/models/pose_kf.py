@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
+import os
 import numpy as np
 
 from openpilot.selfdrive.locationd.models.constants import ObservationKind
@@ -101,6 +102,7 @@ class PoseKalman(KalmanFilter):
     gen_code(generated_dir, name, f_sym, dt, state_sym, obs_eqs, dim_state, dim_state_err)
 
   def __init__(self, generated_dir, max_rewind_age):
+    generated_dir = os.environ.get("OPENPILOT_ANDROID_NATIVE_DIR", generated_dir)
     dim_state, dim_state_err = PoseKalman.initial_x.shape[0], PoseKalman.initial_P.shape[0]
     self.filter = EKF_sym_pyx(generated_dir, self.name, PoseKalman.Q, PoseKalman.initial_x, PoseKalman.initial_P,
                               dim_state, dim_state_err, max_rewind_age=max_rewind_age)

@@ -1,0 +1,8 @@
+--- a/setup.py
++++ b/setup.py
+@@ -168,2 +168,5 @@
+                 fetch_libcapnp(bundle_dir, self.libcapnp_url)
++                if os.environ.get("OPENPILOT_CAPNP_PATCH"):
++                    import subprocess
++                    subprocess.check_call(["patch", "-p1", "-i", os.environ["OPENPILOT_CAPNP_PATCH"]], cwd=_this_dir)
+                 build_libcapnp(bundle_dir, build_dir)

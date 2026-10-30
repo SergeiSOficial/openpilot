@@ -13,9 +13,11 @@ from openpilot.selfdrive.controls.radard import _LEAD_ACCEL_TAU
 if __name__ == '__main__':  # generating code
   from acados.acados_template import AcadosModel, AcadosOcp, AcadosOcpSolver
 else:
-  from openpilot.selfdrive.controls.lib.longitudinal_mpc_lib.c_generated_code.acados_ocp_solver_pyx import AcadosOcpSolverCython
-
-from casadi import SX, vertcat
+  if os.environ.get("OPENPILOT_ANDROID_NATIVE_DIR"):
+    from openpilot.common.android import load_extension
+    AcadosOcpSolverCython = load_extension("acados_ocp_solver_pyx", "libacados_ocp_solver_pyx.so").AcadosOcpSolverCython
+  else:
+    from openpilot.selfdrive.controls.lib.longitudinal_mpc_lib.c_generated_code.acados_ocp_solver_pyx import AcadosOcpSolverCython
 
 MODEL_NAME = 'long'
 LONG_MPC_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -85,6 +87,7 @@ def get_safe_obstacle_distance(v_ego, t_follow):
   return (v_ego**2) / (2 * COMFORT_BRAKE) + t_follow * v_ego + STOP_DISTANCE
 
 def gen_long_model():
+  from casadi import SX, vertcat
   model = AcadosModel()
   model.name = MODEL_NAME
 
@@ -118,6 +121,7 @@ def gen_long_model():
   return model
 
 def gen_long_ocp():
+  from casadi import vertcat
   ocp = AcadosOcp()
   ocp.model = gen_long_model()
 

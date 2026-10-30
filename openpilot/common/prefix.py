@@ -1,5 +1,4 @@
 import os
-import platform
 import shutil
 import uuid
 
@@ -12,7 +11,7 @@ from openpilot.common.hardware.hw import DEFAULT_DOWNLOAD_CACHE_ROOT
 class OpenpilotPrefix:
   def __init__(self, prefix: str | None = None, create_dirs_on_enter: bool = True, clean_dirs_on_exit: bool = True, shared_download_cache: bool = False):
     self.prefix = prefix if prefix else str(uuid.uuid4().hex[0:15])
-    shm_path = "/tmp" if platform.system() == "Darwin" else "/dev/shm"
+    shm_path = Paths.shm_path()
     self.msgq_path = os.path.join(shm_path, "msgq_" + self.prefix)
     self.create_dirs_on_enter = create_dirs_on_enter
     self.clean_dirs_on_exit = clean_dirs_on_exit
@@ -54,8 +53,9 @@ class OpenpilotPrefix:
       shutil.rmtree(os.path.realpath(symlink_path), ignore_errors=True)
       os.remove(symlink_path)
     shutil.rmtree(self.msgq_path, ignore_errors=True)
-    if PC:
+    if PC and not os.environ.get("OPENPILOT_ANDROID_ROOT"):
       shutil.rmtree(Paths.log_root(), ignore_errors=True)
     if not os.environ.get("COMMA_CACHE", False):
       shutil.rmtree(Paths.download_cache_root(), ignore_errors=True)
-    shutil.rmtree(Paths.comma_home(), ignore_errors=True)
+    if not os.environ.get("OPENPILOT_ANDROID_ROOT"):
+      shutil.rmtree(Paths.comma_home(), ignore_errors=True)

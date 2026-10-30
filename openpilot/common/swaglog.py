@@ -5,7 +5,10 @@ import warnings
 from pathlib import Path
 from logging.handlers import BaseRotatingHandler
 
-import zmq
+if os.environ.get("OPENPILOT_ANDROID_ROOT"):
+  zmq = None
+else:
+  import zmq
 
 from openpilot.common.logging_extra import SwagLogger, SwagFormatter, SwagLogFileFormatter
 from openpilot.common.hardware.hw import Paths
@@ -83,6 +86,8 @@ class UnixDomainSocketHandler(logging.Handler):
       self.zctx.term()
 
   def connect(self):
+    if zmq is None:
+      raise RuntimeError("Android simulation logs use app-private files and Logcat")
     self.zctx = zmq.Context()
     self.sock = self.zctx.socket(zmq.PUSH)
     self.sock.setsockopt(zmq.LINGER, 10)
@@ -138,8 +143,10 @@ elif print_level == 'info':
 elif print_level == 'warning':
   outhandler.setLevel(logging.WARNING)
 
-ipchandler = UnixDomainSocketHandler(SwagFormatter(log))
-
 log.addHandler(outhandler)
-# logs are sent through IPC before writing to disk to prevent disk I/O blocking
-log.addHandler(ipchandler)
+if os.environ.get("OPENPILOT_ANDROID_ROOT"):
+  add_file_handler(log)
+else:
+  ipchandler = UnixDomainSocketHandler(SwagFormatter(log))
+  # logs are sent through IPC before writing to disk to prevent disk I/O blocking
+  log.addHandler(ipchandler)

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from __future__ import annotations
 import os
 import time
 import copy
@@ -8,7 +9,7 @@ import numpy as np
 from collections import Counter
 from dataclasses import dataclass, field
 from itertools import islice
-from typing import Any
+from typing import Any, TYPE_CHECKING
 from collections.abc import Callable, Iterable
 from tqdm import tqdm
 import capnp
@@ -25,11 +26,11 @@ from openpilot.common.prefix import OpenpilotPrefix
 from openpilot.common.timeout import Timeout
 from openpilot.common.realtime import DT_CTRL
 from openpilot.system.camerad.cameras.nv12_info import get_nv12_info
-from openpilot.system.manager.process_config import managed_processes
 from openpilot.selfdrive.test.process_replay.vision_meta import meta_from_camera_state, available_streams
 from openpilot.selfdrive.test.process_replay.capture import ProcessOutputCapture
-from openpilot.tools.lib.logreader import LogIterable
-from openpilot.tools.lib.framereader import FrameReader
+if TYPE_CHECKING:
+  from openpilot.tools.lib.logreader import LogIterable
+  from openpilot.tools.lib.framereader import FrameReader
 
 # Numpy gives different results based on CPU features after version 19
 NUMPY_TOLERANCE = 1e-2
@@ -48,7 +49,8 @@ class LauncherWithCapture:
 
 
 class ReplayContext:
-  def __init__(self, cfg):
+  def __init__(self, cfg, backend=None):
+    self.backend = backend
     self.proc_name = cfg.proc_name
     self.pubs = cfg.pubs
     self.main_pub = cfg.main_pub
@@ -89,7 +91,7 @@ class ReplayContext:
     return [man.recv_ready_event for man in self.events.values()]
 
   def send_sync(self, pm, endpoint, dat):
-    self.events[endpoint].recv_called_event.wait()
+    self.wait_for_events([self.events[endpoint].recv_called_event])
     self.events[endpoint].recv_called_event.clear()
     pm.send(endpoint, dat)
     self.events[endpoint].recv_ready_event.set()
@@ -97,20 +99,25 @@ class ReplayContext:
   def unlock_sockets(self):
     expected_sets = len(self.events)
     while expected_sets > 0:
-      index = messaging.wait_for_one_event(self.all_recv_called_events)
+      index = self.wait_for_events(self.all_recv_called_events)
       self.all_recv_called_events[index].clear()
       self.all_recv_ready_events[index].set()
       expected_sets -= 1
 
   def wait_for_recv_called(self):
-    messaging.wait_for_one_event(self.all_recv_called_events)
+    self.wait_for_events(self.all_recv_called_events)
+
+  def wait_for_events(self, events):
+    if self.backend is not None:
+      return self.backend.wait_for_events(events)
+    return messaging.wait_for_one_event(events)
 
   def wait_for_next_recv(self, trigger_empty_recv):
-    index = messaging.wait_for_one_event(self.all_recv_called_events)
+    index = self.wait_for_events(self.all_recv_called_events)
     if self.main_pub is not None and self.main_pub_drained and trigger_empty_recv:
       self.all_recv_called_events[index].clear()
       self.all_recv_ready_events[index].set()
-      self.all_recv_called_events[index].wait()
+      self.wait_for_events([self.all_recv_called_events[index]])
 
 
 @dataclass
@@ -139,10 +146,15 @@ class ProcessConfig:
 
 
 class ProcessContainer:
-  def __init__(self, cfg: ProcessConfig):
+  def __init__(self, cfg: ProcessConfig, backend=None):
+    self.backend = backend
     self.prefix = OpenpilotPrefix(create_dirs_on_enter=False, clean_dirs_on_exit=False)
     self.cfg = copy.deepcopy(cfg)
-    self.process = copy.deepcopy(managed_processes[cfg.proc_name])
+    if backend is None:
+      from openpilot.system.manager.process_config import managed_processes
+      self.process = copy.deepcopy(managed_processes[cfg.proc_name])
+    else:
+      self.process = backend.create_process(cfg.proc_name)
     self.msg_queue: list[capnp._DynamicStructReader] = []
     self.last_input_log_mono_time: int = -1
     self.cnt = 0
@@ -166,7 +178,7 @@ class ProcessContainer:
     return self.cfg.subs
 
   def _clean_env(self):
-    for k in self.environ_config.keys():
+    for k in (self.environ_config or {}).keys():
       if k in os.environ:
         del os.environ[k]
 
@@ -231,7 +243,7 @@ class ProcessContainer:
         params = Params()
         self.cfg.config_callback(params, self.cfg, all_msgs)
 
-      self.rc = ReplayContext(self.cfg)
+      self.rc = ReplayContext(self.cfg, self.backend)
       self.rc.open_context()
 
       self.pm = messaging.PubMaster(self.cfg.pubs)
@@ -248,13 +260,18 @@ class ProcessContainer:
       self._start_process()
 
       if self.cfg.init_callback is not None:
-        self.cfg.init_callback(self.rc, self.pm, all_msgs, fingerprint)
+        if self.backend is None:
+          self.cfg.init_callback(self.rc, self.pm, all_msgs, fingerprint)
+        else:
+          with self.backend.step_context(self.cfg.proc_name, self.cfg.timeout):
+            self.cfg.init_callback(self.rc, self.pm, all_msgs, fingerprint)
 
   def stop(self):
     with self.prefix:
       self.process.signal(signal.SIGKILL)
       self.process.stop()
-      self.rc.close_context()
+      if self.rc is not None:
+        self.rc.close_context()
       self.prefix.clean_dirs()
       self._clean_env()
 
@@ -282,7 +299,9 @@ class ProcessContainer:
 
     self.msg_queue.append(msg)
     if end_of_cycle:
-      with self.prefix, Timeout(self.cfg.timeout, error_msg=f"timed out testing process {repr(self.cfg.proc_name)}"):
+      timeout = (Timeout(self.cfg.timeout, error_msg=f"timed out testing process {repr(self.cfg.proc_name)}")
+                 if self.backend is None else self.backend.step_context(self.cfg.proc_name, self.cfg.timeout))
+      with self.prefix, timeout:
         # call recv to let sub-sockets reconnect, after we know the process is ready
         if self.cnt == 0:
           for s in self.sockets:
@@ -629,7 +648,8 @@ def replay_process_with_name(name: str | Iterable[str], lr: LogIterable, *args, 
 def replay_process(
   cfg: ProcessConfig | Iterable[ProcessConfig], lr: LogIterable, frs: dict[str, FrameReader] | None = None,
   fingerprint: str | None = None, return_all_logs: bool = False, custom_params: dict[str, Any] | None = None,
-  captured_output_store: dict[str, dict[str, str]] | None = None, disable_progress: bool = False
+  captured_output_store: dict[str, dict[str, str]] | None = None, disable_progress: bool = False, backend=None,
+  drain_outputs: bool = False,
 ) -> list[capnp._DynamicStructReader]:
   if isinstance(cfg, ProcessConfig):
     cfgs = [cfg]
@@ -642,7 +662,10 @@ def replay_process(
                          manager_states=True,
                          panda_states=any("pandaStates" in cfg.pubs for cfg in cfgs),
                          camera_states=any(len(cfg.vision_pubs) != 0 for cfg in cfgs))
-  process_logs = _replay_multi_process(cfgs, all_msgs, frs, fingerprint, custom_params, captured_output_store, disable_progress)
+  if backend is not None and captured_output_store is not None:
+    raise ValueError("A replay backend must capture its own worker logs")
+  process_logs = _replay_multi_process(cfgs, all_msgs, frs, fingerprint, custom_params, captured_output_store,
+                                       disable_progress, backend, drain_outputs)
 
   if return_all_logs:
     keys = {m.which() for m in process_logs}
@@ -658,7 +681,8 @@ def replay_process(
 
 def _replay_multi_process(
   cfgs: list[ProcessConfig], lr: LogIterable, frs: dict[str, FrameReader] | None, fingerprint: str | None,
-  custom_params: dict[str, Any] | None, captured_output_store: dict[str, dict[str, str]] | None, disable_progress: bool
+  custom_params: dict[str, Any] | None, captured_output_store: dict[str, dict[str, str]] | None, disable_progress: bool,
+  backend=None, drain_outputs: bool = False,
 ) -> list[capnp._DynamicStructReader]:
   if fingerprint is not None:
     params_config = generate_params_config(lr=lr, fingerprint=fingerprint, custom_params=custom_params)
@@ -682,7 +706,7 @@ def _replay_multi_process(
   containers = []
   try:
     for cfg in cfgs:
-      container = ProcessContainer(cfg)
+      container = ProcessContainer(cfg, backend)
       containers.append(container)
       container.start(params_config, env_config, all_msgs, frs, fingerprint, captured_output_store is not None)
 
@@ -698,6 +722,19 @@ def _replay_multi_process(
     # heap for maintaining the order of messages generated by processes, where each element: (logMonoTime, index in internal_pub_queue)
     internal_pub_index_heap: list[tuple[int, int]] = []
 
+    def collect_outputs(output_msgs):
+      for m in output_msgs:
+        if m.which() in all_pubs:
+          internal_pub_queue.append(m)
+          heapq.heappush(internal_pub_index_heap, (m.logMonoTime, len(internal_pub_queue) - 1))
+      log_msgs.extend(output_msgs)
+      if backend is not None:
+        backend.on_output(output_msgs)
+
+    def route_message(msg):
+      for container in pubs_to_containers[msg.which()]:
+        collect_outputs(container.run_step(msg, frs))
+
     pbar = tqdm(total=len(external_pub_queue), disable=disable_progress)
     while len(external_pub_queue) != 0 or (len(internal_pub_index_heap) != 0 and not all(c.has_empty_queue for c in containers)):
       if len(internal_pub_index_heap) == 0 or (len(external_pub_queue) != 0 and external_pub_queue[0].logMonoTime < internal_pub_index_heap[0][0]):
@@ -707,19 +744,29 @@ def _replay_multi_process(
         _, index = heapq.heappop(internal_pub_index_heap)
         msg = internal_pub_queue[index]
 
-      target_containers = pubs_to_containers[msg.which()]
-      for container in target_containers:
-        output_msgs = container.run_step(msg, frs)
-        for m in output_msgs:
-          if m.which() in all_pubs:
-            internal_pub_queue.append(m)
-            heapq.heappush(internal_pub_index_heap, (m.logMonoTime, len(internal_pub_queue) - 1))
-        log_msgs.extend(output_msgs)
+      route_message(msg)
 
-    # flush last set of messages from each process
-    for container in containers:
-      last_time = container.last_input_log_mono_time if container.last_input_log_mono_time > 0 else int(time.monotonic() * 1e9)
-      log_msgs.extend(container.get_output_msgs(last_time))
+    # Integrated simulation must propagate the final camera result through downstream workers.
+    # Keep the historical single flush as the default for existing replay callers.
+    while True:
+      if drain_outputs:
+        while internal_pub_index_heap:
+          _, index = heapq.heappop(internal_pub_index_heap)
+          route_message(internal_pub_queue[index])
+      for container in containers:
+        last_time = container.last_input_log_mono_time if container.last_input_log_mono_time > 0 else int(time.monotonic() * 1e9)
+        timeout = (Timeout(container.cfg.timeout, error_msg=f"timed out flushing {container.cfg.proc_name}")
+                   if backend is None else backend.step_context(container.cfg.proc_name, container.cfg.timeout))
+        with timeout:
+          output_msgs = container.get_output_msgs(last_time)
+        if drain_outputs:
+          collect_outputs(output_msgs)
+        else:
+          log_msgs.extend(output_msgs)
+          if backend is not None:
+            backend.on_output(output_msgs)
+      if not drain_outputs or not internal_pub_index_heap:
+        break
   finally:
     for container in containers:
       container.stop()

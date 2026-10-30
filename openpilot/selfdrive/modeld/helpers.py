@@ -1,11 +1,12 @@
 import sys
+import os
 import time
 from pathlib import Path
 
 from openpilot.common.hardware import AGNOS
 from openpilot.common.hardware.usb import CHESTNUT_USB_PRODUCT, USB_DEVICES_PATH, is_chestnut_usb_id
 
-MODELS_DIR = Path(__file__).resolve().parent / 'models'
+MODELS_DIR = Path(os.environ.get('OPENPILOT_ANDROID_MODELS_ROOT', Path(__file__).resolve().parent / 'models'))
 
 
 def modeld_pkl_path(chestnut: bool):
@@ -14,9 +15,13 @@ def modeld_pkl_path(chestnut: bool):
 
 def load_oob(path, chestnut=False):
   from tinygrad import Context
-  device = 'USB+AMD:LLVM' if chestnut else 'QCOM' if AGNOS else 'METAL' if sys.platform == 'darwin' else 'CPU:LLVM'
+  device = 'USB+AMD:LLVM' if chestnut else 'QCOM' if AGNOS else 'METAL' if sys.platform == 'darwin' else (
+    'CPU:CLANG' if os.environ.get('OPENPILOT_ANDROID_ROOT') else 'CPU:LLVM')
   with Context(DEV=device):
-    from tinygrad_repo.examples.openpilot.helpers import load_pickle
+    if os.environ.get('OPENPILOT_ANDROID_ROOT'):
+      from openpilot_android_vendor.helpers import load_pickle
+    else:
+      from tinygrad_repo.examples.openpilot.helpers import load_pickle
     return load_pickle(path, out_of_band=True)
 
 def chestnut_present() -> bool:

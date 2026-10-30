@@ -133,7 +133,7 @@ def build_metadata_from_dict(build_metadata: dict) -> BuildMetadata:
 
 
 def get_build_metadata(path: str = BASEDIR) -> BuildMetadata:
-  build_metadata_path = pathlib.Path(path) / BUILD_METADATA_FILENAME
+  build_metadata_path = pathlib.Path(os.environ.get("OPENPILOT_ANDROID_METADATA", pathlib.Path(path) / BUILD_METADATA_FILENAME))
 
   if build_metadata_path.exists():
     build_metadata = json.loads(build_metadata_path.read_text())
